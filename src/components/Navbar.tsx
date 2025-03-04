@@ -56,9 +56,7 @@ export function Navbar() {
           edge="start"
           color="inherit"
           onClick={() => setDrawerOpen(true)}
-          sx={{
-            position: "relative",
-          }}
+          sx={{ position: "relative" }}
         >
           <MenuIcon sx={{ fontSize: 28, color: "#fff" }} />
         </IconButton>
@@ -72,12 +70,11 @@ export function Navbar() {
             <List sx={{ mt: 5, ml: 5 }}>
               {["Home", "Menu", "Contact"].map((text, index) => (
                 <Link
+                  key={index}
                   href={text === "Home" ? "/" : `/${text.toLowerCase()}`}
                   passHref
-                  key={index}
                 >
                   <ListItem
-                    component="a"
                     onClick={() => setDrawerOpen(false)}
                     sx={{ cursor: "pointer" }}
                   >
