@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { formatCurrency } from "@/lib/currency";
 import { MdDeleteSweep } from "react-icons/md";

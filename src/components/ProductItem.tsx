@@ -9,12 +9,14 @@ type ProductItemProps = {
   product: IProductProps;
   quantity: number;
   handleQuantityChange: (id: number, quantity: number) => void;
+  isLast?: boolean;
 };
 
 export function ProductItem({
   product,
   quantity,
   handleQuantityChange,
+  isLast,
 }: ProductItemProps) {
   const { addProduct } = useCart();
 
@@ -30,6 +32,7 @@ export function ProductItem({
         justifyContent: "center",
         backgroundColor: "#000",
         padding: { xs: 2, md: 4 },
+        borderBottom: isLast ? "none" : "2px dotted white",
       }}
     >
       <Box

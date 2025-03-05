@@ -88,7 +88,7 @@ export function Hero() {
         src="https://player.vimeo.com/video/1062717453?h=eacb2b06c0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;muted=1&amp;background=1"
         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
         style={{
-          position: "fixed",
+          position: "absolute",
           top: 0,
           left: 0,
           width: "100vw",

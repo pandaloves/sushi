@@ -1,42 +1,76 @@
 "use client";
 
-import { Box, InputBase } from "@mui/material";
+import { Box, BoxProps, InputBase, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
 
-export function SearchInput() {
+type SearchInputProps = {
+  searchTerm: string;
+  handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSearchSubmit: () => void;
+  productNotFound: boolean;
+  sx?: BoxProps;
+};
+
+export function SearchInput({
+  searchTerm,
+  handleSearchChange,
+  handleSearchSubmit,
+  productNotFound,
+  sx,
+}: SearchInputProps) {
   return (
-    <Box display="flex" justifyContent="center" sx={{ mt: 20 }}>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          border: "2px solid white",
-          borderRadius: "8px",
-          padding: "13px 12px",
-          backgroundColor: "rgba(255, 255, 255, 0.1)",
-          width: { xs: "80%", md: "100%" },
-          maxWidth: "600px",
-          mt: { xs: -10, md: -3 },
-        }}
-      >
-        <Icon
-          icon="material-symbols:search"
-          width={35}
-          height={35}
-          color="#fff"
-        />
-        <InputBase
-          placeholder="Search"
+    <Box display="flex" justifyContent="center" sx={{ mt: 20, ...sx }}>
+      <Box display="flex" flexDirection="column" gap={2}>
+        <Box
           sx={{
-            ml: 1,
-            flex: 1,
-            color: "#fff",
-            fontSize: "1rem",
-            "&::placeholder": {
-              color: "rgba(252, 251, 251, 0.7)",
-            },
+            display: "flex",
+            alignItems: "center",
+            border: "2px solid white",
+            borderRadius: 5,
+            p: 2,
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
+            width: 400,
+            maxWidth: "86vw",
           }}
-        />
+        >
+          <Icon
+            icon="material-symbols:search"
+            width={35}
+            height={35}
+            color="#fff"
+          />
+          <InputBase
+            value={searchTerm}
+            onChange={handleSearchChange}
+            onKeyDown={(e) => e.key === "Enter" && handleSearchSubmit()}
+            placeholder="Search..."
+            sx={{
+              ml: 1,
+              flex: 1,
+              width: "100%",
+              color: "#fff",
+              fontSize: "1rem",
+              "&::placeholder": {
+                color: "rgba(252, 251, 251, 0.7)",
+              },
+            }}
+          />
+        </Box>
+
+        <Box>
+          {productNotFound && (
+            <Typography
+              variant="body1"
+              sx={{
+                color: "red",
+                fontWeight: 500,
+                textAlign: "center",
+              }}
+            >
+              No product found with that name.
+            </Typography>
+          )}
+        </Box>
       </Box>
     </Box>
   );

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, ReactElement, ReactNode } from "react";
 import Image from "next/image";
 import { Box, CircularProgress } from "@mui/material";
@@ -5,8 +7,8 @@ import { Box, CircularProgress } from "@mui/material";
 type ImageLoaderProps = {
   src: string;
   alt: string;
-  width?: number; // Add width
-  height?: number; // Add height
+  width?: number; 
+  height?: number;
   divStyle?: React.CSSProperties;
   objectFit?: "fill" | "contain" | "cover" | "none" | "scale-down";
   draggable?: boolean;

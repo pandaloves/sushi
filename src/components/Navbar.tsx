@@ -66,8 +66,22 @@ export function Navbar() {
           open={drawerOpen}
           onClose={() => setDrawerOpen(false)}
         >
-          <Box sx={{ width: 200, p: 2 }}>
-            <List sx={{ mt: 5, ml: 5 }}>
+          <Box
+            sx={{
+              width: "100vw",
+              height: "100vh",
+              color: "common.white",
+              fontSize: "1.5rem",
+              fontWeight: 500,
+              p: 2,
+              backgroundColor: "#a1cb05",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <List sx={{ width: "100%" }}>
               {["Home", "Menu", "Contact"].map((text, index) => (
                 <Link
                   key={index}
@@ -76,9 +90,12 @@ export function Navbar() {
                 >
                   <ListItem
                     onClick={() => setDrawerOpen(false)}
-                    sx={{ cursor: "pointer" }}
+                    sx={{
+                      cursor: "pointer",
+                      textAlign: "center",
+                    }}
                   >
-                    <ListItemText primary={text} />
+                    <ListItemText primary={text} sx={{ textAlign: "center" }} />
                   </ListItem>
                 </Link>
               ))}
