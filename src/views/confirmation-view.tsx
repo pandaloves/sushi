@@ -93,7 +93,7 @@ export function ConfirmationView() {
           display="flex"
           sx={{ justifyContent: { xs: "center", md: "flex-end" }, mt: 3 }}
         >
-          <Link href="/cart" passHref>
+          <Link href="/menu" passHref>
             <Button
               variant="contained"
               size="large"

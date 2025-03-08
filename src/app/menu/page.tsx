@@ -1,6 +1,7 @@
 "use client";
 
 import { SearchInput } from "@/components/SearchInput";
+import { BackToTopButton } from "@/components/ui/back-to-top-button";
 import { useProduct } from "@/context/ProductProvider";
 import { useSearch } from "@/lib/hooks/useSearch";
 import { ProductsView } from "@/views/products-view";
@@ -30,6 +31,10 @@ export default function MenuPage() {
         products={products}
         sx={{ mt: 5, borderTop: "2px solid white" }}
       />
+
+      <Box sx={{ textAlign: "center", mb: 7 }}>
+        <BackToTopButton sx={{ color: "common.white" }} />
+      </Box>
     </Box>
   );
 }
