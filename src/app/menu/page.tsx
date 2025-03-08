@@ -1,18 +1,20 @@
 "use client";
 
 import { SearchInput } from "@/components/SearchInput";
+import { useProduct } from "@/context/ProductProvider";
 import { useSearch } from "@/lib/hooks/useSearch";
 import { ProductsView } from "@/views/products-view";
-import { products } from "../_mock";
-import { Box, Divider } from "@mui/material";
+import { Box } from "@mui/material";
 
-export default function Products() {
+export default function MenuPage() {
   const {
     searchTerm,
     handleSearchChange,
     handleSearchSubmit,
     productNotFound,
   } = useSearch();
+
+  const { products } = useProduct();
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>

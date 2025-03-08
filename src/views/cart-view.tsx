@@ -4,8 +4,9 @@ import Link from "next/link";
 import { formatCurrency } from "@/lib/currency";
 import { MdDeleteSweep } from "react-icons/md";
 import { ICartProps } from "@/types/cart";
-import { Box, Paper, Typography, Button, Stack, Divider } from "@mui/material";
+import { Box, Typography, Button, Stack, Divider } from "@mui/material";
 import { CartTable } from "@/components/CartTable";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 interface CartViewProps {
@@ -49,13 +50,31 @@ export function CartView({
       </Stack>
 
       {cartLength === 0 ? (
-        <>
+        <Box display="flex" flexDirection="column">
           <Divider sx={{ my: 5, borderColor: "common.white" }} />
           <Typography variant="h6" color="common.white" sx={{ mt: 2 }}>
             Your cart is empty. Start adding your order!
           </Typography>
           <Divider sx={{ my: 5, borderColor: "common.white" }} />
-        </>
+
+          <Box display="flex" justifyContent="flex-end">
+            <Link href="/menu" passHref>
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<ArrowBackIosIcon />}
+                sx={{
+                  px: 4,
+                  py: 1.6,
+                  borderRadius: 5,
+                  width: { xs: "100%", md: "auto" },
+                }}
+              >
+                Return to menu
+              </Button>
+            </Link>
+          </Box>
+        </Box>
       ) : (
         <>
           <CartTable cartItems={currentCart} />
@@ -69,16 +88,46 @@ export function CartView({
             <Typography variant="h6">
               Total: <strong>{formatCurrency(totalPrice)}</strong>
             </Typography>
-            <Link href="/checkout/payment" passHref>
-              <Button
-                variant="contained"
-                color="primary"
-                endIcon={<ArrowForwardIosIcon />}
-                sx={{ px: 4, py: 1.6, borderRadius: 5 }}
-              >
-                Checkout
-              </Button>
-            </Link>
+
+            <Box
+              display="flex"
+              flexDirection={{ xs: "column", md: "row" }}
+              gap={2}
+              justifyContent={{ xs: "center", md: "flex-end" }}
+              width="100%"
+            >
+              <Link href="/menu" passHref>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<ArrowBackIosIcon />}
+                  sx={{
+                    px: 4,
+                    py: 1.6,
+                    borderRadius: 5,
+                    width: { xs: "100%", md: "auto" },
+                  }}
+                >
+                  Return to menu
+                </Button>
+              </Link>
+
+              <Link href="/checkout/payment" passHref>
+                <Button
+                  variant="contained"
+                  color="warning"
+                  endIcon={<ArrowForwardIosIcon />}
+                  sx={{
+                    px: 4,
+                    py: 1.6,
+                    borderRadius: 5,
+                    width: { xs: "100%", md: "auto" },
+                  }}
+                >
+                  Checkout
+                </Button>
+              </Link>
+            </Box>
           </Stack>
         </>
       )}

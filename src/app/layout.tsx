@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { CartProvider } from "@/context/CartProvider";
 import ThemeRegistry from "../theme/ThemeRegistry";
 import "@/app/globals.css";
+import { ProductProvider } from "@/context/ProductProvider";
 
 export default function RootLayout({
   children,
@@ -17,12 +18,14 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeRegistry>
             <StyledRoot>
-              <CartProvider>
-                <Box component="main">
-                  <Navbar />
-                  {children}
-                </Box>
-              </CartProvider>
+              <ProductProvider>
+                <CartProvider>
+                  <Box component="main">
+                    <Navbar />
+                    {children}
+                  </Box>
+                </CartProvider>
+              </ProductProvider>
             </StyledRoot>
           </ThemeRegistry>
         </AppRouterCacheProvider>

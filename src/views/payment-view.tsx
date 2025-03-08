@@ -1,16 +1,10 @@
 "use client";
 
-import {
-  Box,
-  Button,
-  Typography,
-  TextField,
-  Paper,
-  FormHelperText,
-} from "@mui/material";
+import { Box, Button, Typography, TextField, Paper } from "@mui/material";
 import { useState } from "react";
 import Link from "next/link";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 export function PaymentView() {
   const [formData, setFormData] = useState({
@@ -161,25 +155,55 @@ export function PaymentView() {
             />
           </Box>
 
-          <Box display="flex" justifyContent="center" sx={{ mt: 3 }}>
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              fullWidth
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: 5,
-                gap: 1,
-                px: 6,
-                py: 2,
-              }}
-            >
-              Confirm Payment
-              <ArrowForwardIosIcon />
-            </Button>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            gap={2}
+            sx={{ mt: 3 }}
+          >
+            <Link href="/cart" passHref>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                fullWidth
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: 5,
+                  gap: 1,
+                  px: 6,
+                  py: 2,
+                }}
+              >
+                <ArrowBackIosIcon />
+                Return to Cart
+              </Button>
+            </Link>
+
+            <Link href="/checkout/confirmation" passHref>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                fullWidth
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: 5,
+                  gap: 1,
+                  px: 6,
+                  py: 2,
+                }}
+              >
+                Confirm Payment
+                <ArrowForwardIosIcon />
+              </Button>
+            </Link>
           </Box>
         </Box>
       </Paper>

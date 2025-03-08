@@ -15,7 +15,7 @@ type ButtonProps = {
   ariaLabel?: string;
   onClick?: () => void;
   variant?: "text" | "outlined" | "contained";
-  color?: "primary" | "secondary" | "error" | "success" | "info" | "warning";
+  color?: "primary" | "secondary" | "error" | "success" | "info" | "warning" ;
   size?: "small" | "medium" | "large";
 };
 

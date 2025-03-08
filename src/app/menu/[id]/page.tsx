@@ -2,17 +2,21 @@
 
 import { useParams } from "next/navigation";
 import { ProductView } from "@/components/product/product-view";
-import { products } from "@/app/_mock";
+import { useProduct } from "@/context/ProductProvider";
+import { Typography } from "@mui/material";
 
 export default function Product({ params }: { params: { id: number } }) {
   const { id } = useParams();
-  const productId = parseInt(id as string, 10);
+  const { products } = useProduct();
+  const productId = Number(id);
 
-  const productData = products.find((product) => product.id === productId);
+  const productData = products.find(
+    (product) => product.productId === productId
+  );
 
   return productData ? (
-    <ProductView pid={productId} productData={productData} />
+    <ProductView productData={productData} />
   ) : (
-    <p>Product not found</p>
+    <Typography variant="body1">Product not found</Typography>
   );
 }

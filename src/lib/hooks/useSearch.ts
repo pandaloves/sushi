@@ -1,12 +1,13 @@
 "use client";
 
+import { useProduct } from "@/context/ProductProvider";
 import { useState } from "react";
-import { products } from "@/app/_mock"; 
 
 export function useSearch() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [productNotFound, setProductNotFound] = useState(false);
+  const { products } = useProduct();
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -21,13 +22,13 @@ export function useSearch() {
   const handleSearch = (query: string) => {
     const lowerCaseQuery = query.toLowerCase();
     const foundProduct = products.find((product) =>
-      product.name.toLowerCase().includes(lowerCaseQuery)
+      product.productName.toLowerCase().includes(lowerCaseQuery)
     );
 
     if (foundProduct) {
       setProductNotFound(false);
 
-      const productElement = document.getElementById(`product-${foundProduct.id}`);
+      const productElement = document.getElementById(`product-${foundProduct.productId}`);
       if (productElement) {
         productElement.scrollIntoView({
           behavior: "smooth",

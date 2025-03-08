@@ -33,10 +33,10 @@ export function ProductsView({ products, sx }: ProductsViewProps) {
       }}
     >
       {products.map((product, index) => (
-        <Box key={product.id} id={`product-${product.id}`}>
+        <Box key={product.productId} id={`product-${product.productId}`}>
           <ProductItem
             product={product}
-            quantity={itemQuantities[product.id] || 0}
+            quantity={itemQuantities[product.productId] || 0}
             handleQuantityChange={handleQuantityChange}
             isLast={index === products.length - 1}
           />

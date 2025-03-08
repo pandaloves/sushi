@@ -6,9 +6,8 @@ import { ShopInfo } from "@/components/ShopInfo";
 import { Hero } from "@/components/Hero";
 import { SearchInput } from "@/components/SearchInput";
 import { Footer } from "@/components/Footer";
-import { products } from "./_mock";
-import { useSearchParams } from "next/navigation";
 import { useSearch } from "@/lib/hooks/useSearch";
+import { useProduct } from "@/context/ProductProvider";
 
 export default function Home() {
   const {
@@ -17,6 +16,8 @@ export default function Home() {
     handleSearchSubmit,
     productNotFound,
   } = useSearch();
+
+  const { products } = useProduct();
 
   return (
     <>

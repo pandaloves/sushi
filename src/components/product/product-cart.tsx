@@ -2,6 +2,8 @@
 
 import { useState, useEffect, ReactElement } from "react";
 import { IProductProps } from "@/types/product";
+import Link from "next/link";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import {
   MdAdd,
   MdAddShoppingCart,
@@ -21,22 +23,18 @@ import {
 
 type AddCartProps = {
   id: number;
-  isMobile: boolean;
   productData: IProductProps;
 };
 
-export function ProductCart({
-  id,
-  isMobile,
-  productData,
-}: AddCartProps): ReactElement {
+export function ProductCart({ id, productData }: AddCartProps): ReactElement {
   const [loading, setLoading] = useState(true);
   const [productQuantity, setProductQuantity] = useState(0);
+  const [isRemoved, setIsRemoved] = useState(false); // New state to track if item is removed
 
   const { currentCart, addProduct, deleteProduct, handleProductQuantity } =
     useCart();
   const { quantity } =
-    currentCart.find(({ id: cartId }) => cartId === id) ?? {};
+    currentCart.find(({ productId: cartId }) => cartId === id) ?? {};
 
   useEffect(() => {
     const timeoutId = setTimeout(() => setLoading(false), 500);
@@ -47,6 +45,11 @@ export function ProductCart({
     setProductQuantity(quantity ?? 0);
   }, [quantity]);
 
+  const handleRemoveProduct = () => {
+    deleteProduct(id);
+    setIsRemoved(true);
+  };
+
   return (
     <Paper
       elevation={3}
@@ -56,7 +59,7 @@ export function ProductCart({
         borderRadius: 2,
         maxWidth: 580,
         overflow: "hidden",
-        height: loading ? 200 : quantity ? 183 : 133,
+        minHeight: 200,
         display: "flex",
         flexDirection: "column",
         gap: 2,
@@ -81,69 +84,100 @@ export function ProductCart({
             sx={{ gridColumn: "span 2", justifySelf: "center" }}
           />
         </Box>
-      ) : productQuantity ? (
-        <Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 2,
-            }}
-          >
-            <IconButton
-              color="primary"
-              onClick={() => handleProductQuantity(id, "decrement")()}
-              disabled={productQuantity <= 1}
-            >
-              <MdRemove />
-            </IconButton>
-
-            <TextField
-              size="small"
-              type="number"
-              slotProps={{
-                input: { inputProps: { min: 1, max: 100 } },
-              }}
-              value={productQuantity}
-              onChange={(e) =>
-                handleProductQuantity(id, Number(e.target.value))()
-              }
-              sx={{ width: 78 }}
-            />
-
-            <IconButton
-              color="primary"
-              onClick={() => handleProductQuantity(id, "increment")()}
-              disabled={productQuantity >= 100}
-            >
-              <MdAdd />
-            </IconButton>
-          </Box>
-
-          <Button
-            variant="outlined"
-            startIcon={<MdRemoveShoppingCart />}
-            fullWidth
-            onClick={() => deleteProduct(id)}
-            sx={{ mt: 2 }}
-          >
-            Remove from cart
-          </Button>
-        </Box>
       ) : (
-        <Box>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<MdAddShoppingCart />}
-            fullWidth
-            onClick={() =>
-              addProduct({ ...productData, quantity: productQuantity })
-            }
-          >
-            Add to cart
-          </Button>
+        !isRemoved && (
+          <Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 2,
+              }}
+            >
+              <IconButton
+                color="primary"
+                onClick={() => handleProductQuantity(id, "decrement")()}
+                disabled={productQuantity <= 1}
+              >
+                <MdRemove />
+              </IconButton>
+
+              <TextField
+                size="small"
+                type="number"
+                slotProps={{
+                  input: { inputProps: { min: 1, max: 100 } },
+                }}
+                value={productQuantity}
+                onChange={(e) =>
+                  handleProductQuantity(id, Number(e.target.value))()
+                }
+                sx={{ width: 78 }}
+              />
+
+              <IconButton
+                color="primary"
+                onClick={() => handleProductQuantity(id, "increment")()}
+                disabled={productQuantity >= 100}
+              >
+                <MdAdd />
+              </IconButton>
+            </Box>
+            <Box
+              display="flex"
+              flexDirection={{ xs: "column", md: "row" }}
+              justifyContent="center"
+              alignItems="center"
+              gap={2}
+              sx={{ mt: 3 }}
+            >
+              <Button
+                variant="outlined"
+                startIcon={<MdRemoveShoppingCart />}
+                onClick={handleRemoveProduct}
+              >
+                Remove from cart
+              </Button>
+
+              <Link href="/cart" passHref>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<MdAddShoppingCart />}
+                >
+                  Return to cart
+                </Button>
+              </Link>
+            </Box>
+          </Box>
+        )
+      )}
+
+      {isRemoved && (
+        <Box display="flex" justifyContent="flex-end" sx={{ mt: "auto" }}>
+          <Link href="/menu" passHref>
+            <Button
+              variant="contained"
+              size="large"
+              sx={{
+                height: 58,
+                backgroundColor: "primary.main",
+                color: "common.white",
+                borderRadius: 5,
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+                "&:hover": {
+                  color: "primary.main",
+                  backgroundColor: "#f1f1f1",
+                },
+              }}
+            >
+              <ArrowBackIosIcon />
+              Return to Menu
+            </Button>
+          </Link>
         </Box>
       )}
     </Paper>
