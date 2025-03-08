@@ -7,14 +7,12 @@ import { Box, Typography, Paper, Divider } from "@mui/material";
 type ProductDetailProps = {
   name: string;
   price: number;
-  category: string;
   description: string;
 };
 
 export function ProductDetail({
   name,
   price,
-  category,
   description,
 }: ProductDetailProps): ReactElement {
   return (
@@ -41,14 +39,6 @@ export function ProductDetail({
 
       <Divider />
 
-      <Box>
-        <Typography variant="body2" color="text.secondary">
-          Category:{" "}
-          <Typography variant="body2" component="span" fontWeight={500}>
-            {category}
-          </Typography>
-        </Typography>
-      </Box>
       <Typography variant="body2">{description}</Typography>
     </Paper>
   );

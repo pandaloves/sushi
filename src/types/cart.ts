@@ -1,8 +1,8 @@
 export type ICartProps = {
-    id: number;
-    name: string;
-    price: number;
-    image: string;
+    productId: number;
+    productName: string;
+    productPrice: number;
+    productImage: string;
     quantity: number;
   }
   

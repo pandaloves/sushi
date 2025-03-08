@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Stack from "@mui/material/Stack";

@@ -9,14 +9,16 @@ type ProductItemProps = {
   product: IProductProps;
   quantity: number;
   handleQuantityChange: (id: number, quantity: number) => void;
+  isLast?: boolean;
 };
 
 export function ProductItem({
   product,
   quantity,
   handleQuantityChange,
+  isLast,
 }: ProductItemProps) {
-  const { addProduct } = useCart();
+  const { addProduct, handleOrderNow } = useCart();
 
   return (
     <Box
@@ -30,6 +32,7 @@ export function ProductItem({
         justifyContent: "center",
         backgroundColor: "#000",
         padding: { xs: 2, md: 4 },
+        borderBottom: isLast ? "none" : "2px dotted white",
       }}
     >
       <Box
@@ -46,8 +49,8 @@ export function ProductItem({
       >
         <Box
           component="img"
-          src={product.image}
-          alt={product.name}
+          src={product.productImage}
+          alt={product.productName}
           sx={{
             width: { xs: "100%", sm: "80%" },
             height: { md: "100%" },
@@ -79,7 +82,7 @@ export function ProductItem({
             color: "common.white",
           }}
         >
-          {product.name}
+          {product.productName}
         </Typography>
 
         <Typography
@@ -91,7 +94,7 @@ export function ProductItem({
             color: "common.white",
           }}
         >
-          {product.description}
+          {product.productDescription}
         </Typography>
 
         <Typography
@@ -102,7 +105,7 @@ export function ProductItem({
             color: "common.white",
           }}
         >
-          {product.price} SEK
+          {product.productPrice} SEK
         </Typography>
 
         <Box
@@ -113,7 +116,9 @@ export function ProductItem({
         >
           <Box display="flex" alignItems="center" gap={2}>
             <IconButton
-              onClick={() => handleQuantityChange(product.id, quantity - 1)}
+              onClick={() =>
+                handleQuantityChange(product.productId, quantity - 1)
+              }
               sx={{ border: "1px solid #ddd", color: "#fff" }}
             >
               <Remove />
@@ -122,7 +127,7 @@ export function ProductItem({
               type="number"
               value={quantity}
               onChange={(e) =>
-                handleQuantityChange(product.id, Number(e.target.value))
+                handleQuantityChange(product.productId, Number(e.target.value))
               }
               sx={{
                 width: 60,
@@ -149,32 +154,66 @@ export function ProductItem({
             />
 
             <IconButton
-              onClick={() => handleQuantityChange(product.id, quantity + 1)}
+              onClick={() =>
+                handleQuantityChange(product.productId, quantity + 1)
+              }
               sx={{ border: "1px solid #ddd", color: "common.white" }}
             >
               <Add />
             </IconButton>
           </Box>
         </Box>
-        <Button
-          variant="contained"
-          onClick={() =>
-            addProduct({
-              ...product,
-              quantity,
-            })
-          }
-          sx={{
-            width: 150,
-            height: 58,
-            mt: 3,
-            backgroundColor: "common.white",
-            color: "#000",
-            borderRadius: 5,
-          }}
-        >
-          Add To Cart
-        </Button>
+        <Box display="flex" gap={2}>
+          <Button
+            variant="contained"
+            disabled={quantity === 0}
+            onClick={() =>
+              addProduct({
+                ...product,
+                quantity,
+              })
+            }
+            sx={{
+              width: 150,
+              height: 58,
+              mt: 3,
+              backgroundColor: quantity === 0 ? "grey.500" : "common.white",
+              color: quantity === 0 ? "grey.300" : "#000",
+              borderRadius: 5,
+              "&:disabled": {
+                backgroundColor: "grey.400",
+                color: "grey.300",
+              },
+            }}
+          >
+            Add To Cart
+          </Button>
+
+          <Button
+            variant="contained"
+            disabled={quantity === 0}
+            onClick={() =>
+              handleOrderNow({
+                ...product,
+                quantity,
+              })
+            }
+            sx={{
+              width: 150,
+              height: 58,
+              mt: 3,
+              backgroundColor: quantity === 0 ? "grey.500" : "#fa8203",
+              color: quantity === 0 ? "grey.300" : "#000",
+              borderRadius: 5,
+              "&:disabled": {
+                backgroundColor: "grey.600",
+                color: "grey.300",
+              },
+            }}
+          >
+            Order Now
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

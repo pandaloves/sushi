@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['magnificent-pastelito-7497e6.netlify.app'], 
+    domains: ["encrypted-tbn0.gstatic.com"], 
   },
 };
 

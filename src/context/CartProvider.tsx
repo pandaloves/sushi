@@ -3,12 +3,11 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import type { ReactNode, ChangeEvent, ReactElement } from "react";
 import { ICartProps } from "@/types/cart";
-import { useWindowSize } from "@/lib/hooks/useWindowSize";
+import { useRouter } from "next/navigation";
 
 type Carts = ICartProps[];
 
 type CartContext = {
-  isMobile: boolean;
   totalPrice: number;
   currentCart: Carts;
   cartProducts: number;
@@ -19,26 +18,19 @@ type CartContext = {
     productId: number,
     type?: "increment" | "decrement" | number
   ) => (e?: ChangeEvent<HTMLInputElement>) => void;
+  handleOrderNow: (productData: ICartProps) => void;
 };
-
-const CartContext = createContext<CartContext | null>(null);
-
-export function useCart(): CartContext {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
-  return context;
-}
 
 type CartProviderProps = {
   children: ReactNode;
 };
 
+const CartContext = createContext<CartContext | null>(null);
+
 export function CartProvider({ children }: CartProviderProps): ReactElement {
   const [currentCart, setCurrentCart] = useState<Carts>([]);
   const [isClient, setIsClient] = useState(false);
-  const [width] = useWindowSize();
+  const router = useRouter();
 
   useEffect(() => {
     setIsClient(true);
@@ -55,11 +47,11 @@ export function CartProvider({ children }: CartProviderProps): ReactElement {
   const addProduct = (productData: ICartProps) => {
     setCurrentCart((prevCart) => {
       const existingProduct = prevCart.find(
-        (item) => item.id === productData.id
+        (item) => item.productId === productData.productId
       );
       if (existingProduct) {
         return prevCart.map((item) =>
-          item.id === productData.id
+          item.productId === productData.productId
             ? { ...item, quantity: item.quantity + productData.quantity }
             : item
         );
@@ -70,7 +62,7 @@ export function CartProvider({ children }: CartProviderProps): ReactElement {
 
   const deleteProduct = (productId: number) => {
     setCurrentCart((prevCart) =>
-      prevCart.filter((item) => item.id !== productId)
+      prevCart.filter((item) => item.productId !== productId)
     );
   };
 
@@ -79,7 +71,7 @@ export function CartProvider({ children }: CartProviderProps): ReactElement {
     (e?: ChangeEvent<HTMLInputElement>): void => {
       setCurrentCart((prevCart) =>
         prevCart.map((cartProduct) =>
-          cartProduct.id === productId
+          cartProduct.productId === productId
             ? {
                 ...cartProduct,
                 quantity: Math.max(
@@ -98,20 +90,22 @@ export function CartProvider({ children }: CartProviderProps): ReactElement {
       );
     };
 
+  const handleOrderNow = (productData: ICartProps) => {
+    addProduct(productData);
+    router.push("/cart");
+  };
+
   const clearCart = (): void => setCurrentCart([]);
 
   const [cartProducts, totalPrice] = currentCart.reduce(
-    ([products, total], { price, quantity }) => [
+    ([products, total], { productPrice, quantity }) => [
       products + quantity,
-      total + price * quantity,
+      total + productPrice * quantity,
     ],
     [0, 0]
   );
 
-  const isMobile = width < 768;
-
   const value = {
-    isMobile,
     totalPrice,
     currentCart,
     cartProducts,
@@ -119,6 +113,7 @@ export function CartProvider({ children }: CartProviderProps): ReactElement {
     addProduct,
     deleteProduct,
     handleProductQuantity,
+    handleOrderNow,
   };
 
   return (
@@ -126,4 +121,12 @@ export function CartProvider({ children }: CartProviderProps): ReactElement {
       {isClient && children}
     </CartContext.Provider>
   );
+}
+
+export function useCart(): CartContext {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
 }
