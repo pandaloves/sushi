@@ -34,28 +34,28 @@ export function Hero() {
           component="img"
           src="/images/logo.png"
           sx={{
-            width: { xs: 60, sm: 100 },
-            height: { xs: 60, sm: 100 },
+            width: { xs: 50, sm: 80, md: 100 },
+            height: { xs: 50, sm: 80, md: 100 },
             borderRadius: "50%",
             mx: "auto",
           }}
         />
 
-        <Stack direction="column" alignItems="start" marginTop={-1}>
+        <Stack direction="column" alignItems="start" marginTop={-1} gap={1}>
           <Stack direction="row" alignItems="center" spacing={2}>
             <Icon
               icon="material-symbols:location-on-outline"
-              width={36}
-              height={36}
+              width={30}
+              height={30}
             />
-            <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+            <Typography fontSize={{ xs: "1rem", md: "1.5rem" }}>
               123 Stora Gatan, Stockholm
             </Typography>
           </Stack>
 
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Icon icon="material-symbols:call-outline" width={36} height={36} />
-            <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+            <Icon icon="material-symbols:call-outline" width={30} height={30} />
+            <Typography fontSize={{ xs: "1rem", md: "1.5rem" }}>
               070-1230-7890
             </Typography>
           </Stack>
@@ -63,21 +63,21 @@ export function Hero() {
           <Stack direction="row" alignItems="center" spacing={2}>
             <Icon
               icon="material-symbols:nest-clock-farsight-analog-outline"
-              width={36}
-              height={36}
+              width={30}
+              height={30}
             />
-            <Typography variant="body2" sx={{ fontWeight: "bold" }}>
-              Average manufacturing time: 25 minutes
+            <Typography fontSize={{ xs: "1rem", md: "1.5rem" }}>
+              Average waiting time: 25 minutes
             </Typography>
           </Stack>
 
           <Stack direction="row" alignItems="center" spacing={2}>
             <Icon
               icon="material-symbols-light:room-service-outline"
-              width={36}
-              height={36}
+              width={30}
+              height={30}
             />
-            <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+            <Typography fontSize={{ xs: "1rem", md: "1.5rem" }}>
               Open: 09:00 - 22:00 Tuesday - Sunday
             </Typography>
           </Stack>

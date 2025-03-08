@@ -71,7 +71,7 @@ export function PaymentView() {
     <Box sx={{ display: "flex", justifyContent: "center", mt: 10, mx: 2 }}>
       <Paper
         elevation={3}
-        sx={{ mt: 8, mb: 6, p: 4, maxWidth: 580, width: "100%" }}
+        sx={{ mt: 10, mb: 8, p: 4, maxWidth: 580, width: "100%" }}
       >
         <Typography
           variant="h5"
@@ -155,14 +155,28 @@ export function PaymentView() {
             />
           </Box>
 
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            gap={2}
-            sx={{ mt: 3 }}
-          >
+          <Box display="flex" flexDirection="column" gap={2} sx={{ mt: 3 }}>
+            <Link href="/checkout/confirmation" passHref>
+              <Button
+                variant="contained"
+                color="warning"
+                type="submit"
+                fullWidth
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: 5,
+                  gap: 1,
+                  px: 3,
+                  py: 2,
+                }}
+              >
+                Confirm Payment
+                <ArrowForwardIosIcon />
+              </Button>
+            </Link>
+
             <Link href="/cart" passHref>
               <Button
                 variant="contained"
@@ -175,33 +189,12 @@ export function PaymentView() {
                   alignItems: "center",
                   borderRadius: 5,
                   gap: 1,
-                  px: 6,
+                  px: 3,
                   py: 2,
                 }}
               >
                 <ArrowBackIosIcon />
                 Return to Cart
-              </Button>
-            </Link>
-
-            <Link href="/checkout/confirmation" passHref>
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                fullWidth
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: 5,
-                  gap: 1,
-                  px: 6,
-                  py: 2,
-                }}
-              >
-                Confirm Payment
-                <ArrowForwardIosIcon />
               </Button>
             </Link>
           </Box>

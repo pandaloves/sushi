@@ -7,47 +7,44 @@ import { useContext, createContext, useState, useEffect } from "react";
 import type { ReactNode, ReactElement } from "react";
 
 type ProductContextType = {
-    products: IProductProps[];
+  products: IProductProps[];
 };
 
 type ProductProviderProps = {
-    children: ReactNode;
+  children: ReactNode;
 };
 
 const ProductContext = createContext<ProductContextType | null>(null);
 
-export function ProductProvider({ children }: ProductProviderProps): ReactElement {
-    const [products, setProducts] = useState<IProductProps[]>([]);
+export function ProductProvider({
+  children,
+}: ProductProviderProps): ReactElement {
+  const [products, setProducts] = useState<IProductProps[]>([]);
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await axios.get(`${baseUrl}/product`);
-                console.log(response.data);
-                setProducts(response.data);
-            } catch (error) {
-                console.error("API error:", error);
-            }
-        };
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/product`);
+        setProducts(response.data);
+      } catch (error) {
+        console.error("API error:", error);
+      }
+    };
 
-        fetchProducts();
-    }, []);
+    fetchProducts();
+  }, []);
 
-    
+  const value = { products };
 
-    const value = { products };
-
-    return (
-        <ProductContext.Provider value={value}>
-            {children}
-        </ProductContext.Provider>
-    );
+  return (
+    <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
+  );
 }
 
 export function useProduct(): ProductContextType {
-    const context = useContext(ProductContext);
-    if (!context) {
-        throw new Error("useProduct must be used within a ProductProvider");
-    }
-    return context;
+  const context = useContext(ProductContext);
+  if (!context) {
+    throw new Error("useProduct must be used within a ProductProvider");
+  }
+  return context;
 }
