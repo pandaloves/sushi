@@ -49,6 +49,7 @@ export function ProductCart({ id, productData }: AddCartProps): ReactElement {
         px: 3,
         py: 2,
         borderRadius: 2,
+        width: "100%",
         maxWidth: 580,
         overflow: "hidden",
         minHeight: 200,

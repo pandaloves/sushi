@@ -2,7 +2,7 @@
 
 import { useState, ReactElement, ReactNode } from "react";
 import Image from "next/image";
-import { Box, CircularProgress } from "@mui/material";
+import { Box } from "@mui/material";
 
 type ImageLoaderProps = {
   src: string;
@@ -18,8 +18,8 @@ type ImageLoaderProps = {
 export function ProductImage({
   src,
   alt,
-  width = 300, // Default width
-  height = 300, // Default height
+  width = 300,
+  height = 300,
   divStyle = {},
   objectFit = "cover",
   draggable = false,
@@ -37,10 +37,11 @@ export function ProductImage({
         overflow: "hidden",
         bgcolor: isLoading ? "grey.300" : "transparent",
         borderRadius: 2,
+        width: "100%",
+        height: "auto",
         ...divStyle,
       }}
     >
-      {isLoading && <CircularProgress size={30} color="primary" />}
       <Image
         src={src}
         alt={alt}
@@ -52,6 +53,8 @@ export function ProductImage({
         style={{
           opacity: isLoading ? 0 : 1,
           transition: "opacity 0.3s ease-in-out",
+          width: "100%",
+          height: "auto",
         }}
       />
       {children}

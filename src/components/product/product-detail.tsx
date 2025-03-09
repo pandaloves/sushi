@@ -21,6 +21,7 @@ export function ProductDetail({
       sx={{
         p: 3,
         borderRadius: 2,
+        width: "100%",
         maxWidth: 580,
         display: "flex",
         flexDirection: "column",

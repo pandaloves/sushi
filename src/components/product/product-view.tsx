@@ -25,13 +25,29 @@ export function ProductView({ productData }: ProductViewProps): ReactElement {
       display="flex"
       flexDirection={{ xs: "column", md: "row" }}
       justifyContent="center"
+      alignItems="center"
       gap={4}
-      sx={{ mt: { xs: 16, md: 21 }, mb: 5 }}
+      sx={{
+        mt: { xs: 20, md: 22 },
+        mb: 8,
+        px: { xs: 2, md: 4 },
+        width: "100%",
+      }}
     >
-      <Box sx={{ maxWidth: 580 }}>
+      <Box
+        sx={{
+          width: { xs: "100%", sm: "90%", md: "45%" },
+          maxWidth: { xs: "100%", sm: 500, md: 580 },
+        }}
+      >
         <Paper
           elevation={3}
-          sx={{ p: 2, display: "flex", justifyContent: "center" }}
+          sx={{
+            p: 2,
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+          }}
         >
           <ProductImage
             src={productImage}
@@ -41,7 +57,15 @@ export function ProductView({ productData }: ProductViewProps): ReactElement {
         </Paper>
       </Box>
 
-      <Box display="flex" flexDirection="column" gap={3}>
+      <Box
+        display="flex"
+        flexDirection="column"
+        gap={3}
+        sx={{
+          width: { xs: "100%", sm: "90%", md: "45%" },
+          maxWidth: { xs: "100%", sm: 500, md: 580 },
+        }}
+      >
         <ProductDetail
           name={productName}
           price={productPrice}
