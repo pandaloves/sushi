@@ -56,7 +56,7 @@ export function Hero() {
           <Stack direction="row" alignItems="center" spacing={2}>
             <Icon icon="material-symbols:call-outline" width={30} height={30} />
             <Typography fontSize={{ xs: "1rem", md: "1.5rem" }}>
-              070-1230-7890
+              07012307890
             </Typography>
           </Stack>
 
@@ -78,7 +78,7 @@ export function Hero() {
               height={30}
             />
             <Typography fontSize={{ xs: "1rem", md: "1.5rem" }}>
-              Öppen: 09:00 - 22:00 tisdag - söndag
+              Öppet: 09:00 - 22:00 tisdag - söndag
             </Typography>
           </Stack>
         </Stack>
