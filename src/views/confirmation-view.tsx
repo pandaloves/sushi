@@ -53,7 +53,13 @@ export function ConfirmationView() {
 
   return (
     <Box
-      sx={{ display: "flex", justifyContent: "center", mt: 18, mb: 6, mx: 2 }}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        mt: { xs: 18, sm: 20, md: 22 },
+        mb: 6,
+        mx: 2,
+      }}
     >
       <Paper elevation={3} sx={{ p: 4, maxWidth: 680, width: "100%" }}>
         <Typography

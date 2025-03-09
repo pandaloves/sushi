@@ -64,7 +64,7 @@ export function Navbar() {
           onClick={() => setDrawerOpen(true)}
           sx={{ position: "relative" }}
         >
-          <MenuIcon sx={{ fontSize: 28, color: "#fff" }} />
+          <MenuIcon sx={{ fontSize: 26, color: "#fff" }} />
         </IconButton>
 
         <Drawer
@@ -118,16 +118,31 @@ export function Navbar() {
             sx={{
               display: "flex",
               flexDirection: "row",
-              gap: { xs: 5, md: 6.8 },
+              gap: { xs: 4, md: 5 },
             }}
           >
-            <Typography variant="body2" color="#fff">
+            <Typography
+              sx={{
+                fontSize: { xs: "body2", md: "h6" },
+                color: "common.white",
+              }}
+            >
               Välja
             </Typography>
-            <Typography variant="body2" color="#fff">
+            <Typography
+              sx={{
+                fontSize: { xs: "body2", md: "h6" },
+                color: "common.white",
+              }}
+            >
               Betala
             </Typography>
-            <Typography variant="body2" color="#fff">
+            <Typography
+              sx={{
+                fontSize: { xs: "body2", md: "h6" },
+                color: "common.white",
+              }}
+            >
               Hämta
             </Typography>
           </Box>
@@ -147,7 +162,7 @@ export function Navbar() {
             >
               <ShoppingCartIcon
                 sx={{
-                  fontSize: { xs: "1.5rem", sm: "1.75rem" },
+                  fontSize: { xs: "1.75rem", sm: "2rem" },
                   color: "common.white",
                 }}
               />
