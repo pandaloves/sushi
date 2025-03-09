@@ -29,12 +29,12 @@ type AddCartProps = {
 export function ProductCart({ id, productData }: AddCartProps): ReactElement {
   const [loading, setLoading] = useState(true);
   const [productQuantity, setProductQuantity] = useState(0);
-  const [isRemoved, setIsRemoved] = useState(false); // New state to track if item is removed
+  const [isRemoved, setIsRemoved] = useState(false);
 
   const { currentCart, addProduct, deleteProduct, handleProductQuantity } =
     useCart();
-  const { quantity } =
-    currentCart.find(({ productId: cartId }) => cartId === id) ?? {};
+
+  const quantity = currentCart[id] ?? 0;
 
   useEffect(() => {
     const timeoutId = setTimeout(() => setLoading(false), 500);
@@ -42,7 +42,7 @@ export function ProductCart({ id, productData }: AddCartProps): ReactElement {
   }, []);
 
   useEffect(() => {
-    setProductQuantity(quantity ?? 0);
+    setProductQuantity(quantity);
   }, [quantity]);
 
   const handleRemoveProduct = () => {
