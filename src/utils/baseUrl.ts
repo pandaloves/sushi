@@ -1,1 +1,1 @@
-export const baseUrl= 'https://localhost:7086/api'
+export const baseUrl= 'https://sushiapi20250309183202.azurewebsites.net/api'
