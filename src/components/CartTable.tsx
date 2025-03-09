@@ -34,6 +34,7 @@ export function CartTable({
   cartItems: CartItemProps[];
 }): ReactElement {
   const { deleteProduct, handleProductQuantity } = useCart();
+  const { cartProducts, totalPrice } = useCart();
 
   return (
     <TableContainer component={Paper} sx={{ mt: 2 }}>
@@ -157,6 +158,15 @@ export function CartTable({
           )}
         </TableBody>
       </Table>
+
+      <Box sx={{ p: 2, display: "flex", justifyContent: "flex-end" }}>
+        <Typography variant="body2" sx={{ mr: 4 }}>
+          Total Quantities: <strong>{cartProducts}</strong>
+        </Typography>
+        <Typography variant="body2">
+          Total Price: <strong>{formatCurrency(totalPrice)}</strong>
+        </Typography>
+      </Box>
     </TableContainer>
   );
 }

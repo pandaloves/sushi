@@ -13,7 +13,7 @@ export default function Cart(): ReactElement {
     setTotalProducts(cartProducts);
   }, [cartProducts]);
 
-  const cartLength = currentCart.length;
+  const cartLength = Object.keys(currentCart).length;
 
   return (
     <CartView

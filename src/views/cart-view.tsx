@@ -3,14 +3,15 @@
 import Link from "next/link";
 import { formatCurrency } from "@/lib/currency";
 import { MdDeleteSweep } from "react-icons/md";
-import { ICartProps } from "@/types/cart";
 import { Box, Typography, Button, Stack, Divider } from "@mui/material";
 import { CartTable } from "@/components/CartTable";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useProduct } from "@/context/ProductProvider";
+import { useCart } from "@/context/CartProvider";
 
 interface CartViewProps {
-  currentCart: ICartProps[];
+  currentCart: Record<number, number>;
   totalPrice: number;
   clearCart: () => void;
   totalProducts: number;
@@ -23,6 +24,20 @@ export function CartView({
   clearCart,
   cartLength,
 }: CartViewProps) {
+  const { products } = useProduct();
+  const { addOrder } = useCart();
+
+  const cartItems = Object.entries(currentCart).map(([productId, quantity]) => {
+    const product = products.find((p) => p.productId === Number(productId));
+    return {
+      productId: Number(productId),
+      productName: product?.productName || "Unknown Product",
+      productImage: product?.productImage || "",
+      productPrice: product?.productPrice || 0,
+      quantity: quantity,
+    };
+  });
+
   return (
     <Box sx={{ mt: 16, mb: 6, p: 4 }}>
       <Stack
@@ -77,7 +92,7 @@ export function CartView({
         </Box>
       ) : (
         <>
-          <CartTable cartItems={currentCart} />
+          <CartTable cartItems={cartItems} />
 
           <Stack
             direction="row"
@@ -112,21 +127,20 @@ export function CartView({
                 </Button>
               </Link>
 
-              <Link href="/checkout/payment" passHref>
-                <Button
-                  variant="contained"
-                  color="warning"
-                  endIcon={<ArrowForwardIosIcon />}
-                  sx={{
-                    px: 4,
-                    py: 1.6,
-                    borderRadius: 5,
-                    width: { xs: "100%", md: "auto" },
-                  }}
-                >
-                  Checkout
-                </Button>
-              </Link>
+              <Button
+                variant="contained"
+                color="warning"
+                endIcon={<ArrowForwardIosIcon />}
+                onClick={addOrder}
+                sx={{
+                  px: 4,
+                  py: 1.6,
+                  borderRadius: 5,
+                  width: { xs: "100%", md: "auto" },
+                }}
+              >
+                Checkout
+              </Button>
             </Box>
           </Stack>
         </>

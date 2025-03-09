@@ -2,9 +2,8 @@
 
 import { Box, Button, Typography, TextField, Paper } from "@mui/material";
 import { useState } from "react";
-import Link from "next/link";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { baseUrl } from "@/utils/baseUrl";
 
 export function PaymentView() {
   const [formData, setFormData] = useState({
@@ -13,8 +12,11 @@ export function PaymentView() {
     address: "",
     city: "",
     postCode: "",
-    bankNumber: "",
-    cvc: "",
+    phoneNumber: "",
+    nameOnCard: "",
+    cardNumber: "",
+    cvv: "",
+    expirationDate: "",
   });
 
   const [errors, setErrors] = useState({
@@ -23,8 +25,11 @@ export function PaymentView() {
     address: "",
     city: "",
     postCode: "",
-    bankNumber: "",
-    cvc: "",
+    phoneNumber: "",
+    nameOnCard: "",
+    cardNumber: "",
+    cvv: "",
+    expirationDate: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,14 +61,98 @@ export function PaymentView() {
       newErrors.address = "";
     }
 
+    if (!formData.phoneNumber) {
+      newErrors.phoneNumber = "Phone number is required";
+      formIsValid = false;
+    } else if (!/^\d{10}$/.test(formData.phoneNumber)) {
+      newErrors.phoneNumber = "Invalid phone number";
+      formIsValid = false;
+    } else {
+      newErrors.phoneNumber = "";
+    }
+
+    if (!formData.nameOnCard) {
+      newErrors.nameOnCard = "Name on card is required";
+      formIsValid = false;
+    } else {
+      newErrors.nameOnCard = "";
+    }
+
+    if (!formData.cardNumber) {
+      newErrors.cardNumber = "Card number is required";
+      formIsValid = false;
+    } else if (!/^\d{8}$/.test(formData.cardNumber)) {
+      newErrors.cardNumber = "Invalid card number (8 digits required)";
+      formIsValid = false;
+    } else {
+      newErrors.cardNumber = "";
+    }
+
+    if (!formData.cvv) {
+      newErrors.cvv = "CVV is required";
+      formIsValid = false;
+    } else if (!/^\d{3,4}$/.test(formData.cvv)) {
+      newErrors.cvv = "Invalid CVV (3 or 4 digits required)";
+      formIsValid = false;
+    } else {
+      newErrors.cvv = "";
+    }
+
+    if (!formData.expirationDate) {
+      newErrors.expirationDate = "Expiration date is required";
+      formIsValid = false;
+    } else if (!/^\d{2}\/\d{2}$/.test(formData.expirationDate)) {
+      newErrors.expirationDate = "Invalid expiration date (MM/YY)";
+      formIsValid = false;
+    } else {
+      newErrors.expirationDate = "";
+    }
+
     setErrors(newErrors);
     return formIsValid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form is valid, proceeding...");
+      try {
+        const orderId = localStorage.getItem("orderId");
+        if (!orderId || isNaN(parseInt(orderId, 10))) {
+          alert("Invalid order ID. Please try again.");
+          return;
+        }
+
+        const payload = {
+          paymentDto: {
+            ...formData,
+          },
+          orderId: parseInt(orderId, 10),
+        };
+
+        const response = await fetch(`${baseUrl}/Payments/create-payment`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Error response:", errorText);
+          throw new Error("Failed to submit payment");
+        }
+
+        const result = await response.json();
+        console.log("Payment successful:", result);
+
+        localStorage.setItem("paymentDetails", JSON.stringify(formData));
+
+        window.location.href = "/checkout/confirmation";
+      } catch (error) {
+        console.error("Error submitting payment:", error);
+        alert("Failed to submit payment. Please try again.");
+      }
     }
   };
 
@@ -110,6 +199,18 @@ export function PaymentView() {
 
           <TextField
             fullWidth
+            label="Phone Number"
+            name="phoneNumber"
+            type="tel"
+            value={formData.phoneNumber}
+            onChange={handleChange}
+            required
+            error={!!errors.phoneNumber}
+            helperText={errors.phoneNumber}
+          />
+
+          <TextField
+            fullWidth
             label="Address"
             name="address"
             value={formData.address}
@@ -136,67 +237,74 @@ export function PaymentView() {
             />
           </Box>
 
+          <TextField
+            fullWidth
+            label="Card Number"
+            name="cardNumber"
+            type="text"
+            value={formData.cardNumber}
+            onChange={handleChange}
+            required
+            error={!!errors.cardNumber}
+            helperText={errors.cardNumber}
+          />
+
           <Box sx={{ display: "flex", gap: 2 }}>
             <TextField
               fullWidth
-              label="Bank Number"
-              name="bankNumber"
-              type="text"
-              value={formData.bankNumber}
+              label="Name on Card"
+              name="nameOnCard"
+              value={formData.nameOnCard}
               onChange={handleChange}
+              required
+              error={!!errors.nameOnCard}
+              helperText={errors.nameOnCard}
             />
+
             <TextField
-              label="CVC"
-              name="cvc"
-              type="text"
-              value={formData.cvc}
+              fullWidth
+              label="Expiration Date (MM/YY)"
+              name="expirationDate"
+              placeholder="MM/YY"
+              value={formData.expirationDate}
               onChange={handleChange}
-              sx={{ width: "45%" }}
+              required
+              error={!!errors.expirationDate}
+              helperText={errors.expirationDate}
             />
           </Box>
 
-          <Box display="flex" flexDirection="column" gap={2} sx={{ mt: 3 }}>
-            <Link href="/checkout/confirmation" passHref>
-              <Button
-                variant="contained"
-                color="warning"
-                type="submit"
-                fullWidth
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: 5,
-                  gap: 1,
-                  px: 3,
-                  py: 2,
-                }}
-              >
-                Confirm Payment
-                <ArrowForwardIosIcon />
-              </Button>
-            </Link>
+          <TextField
+            label="CVV"
+            name="cvv"
+            type="text"
+            value={formData.cvv}
+            onChange={handleChange}
+            required
+            error={!!errors.cvv}
+            helperText={errors.cvv}
+            sx={{ width: "45%" }}
+          />
 
-            <Link href="/cart" passHref>
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                fullWidth
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: 5,
-                  gap: 1,
-                  px: 3,
-                  py: 2,
-                }}
-              >
-                <ArrowBackIosIcon />
-                Return to Cart
-              </Button>
-            </Link>
+          <Box sx={{ mt: 3, mb: 1 }}>
+            <Button
+              variant="contained"
+              color="warning"
+              type="submit"
+              fullWidth
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 5,
+                gap: 1,
+                px: 3,
+                py: 2,
+              }}
+            >
+              Confirm Payment
+              <ArrowForwardIosIcon />
+            </Button>
           </Box>
         </Box>
       </Paper>

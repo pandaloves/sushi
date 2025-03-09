@@ -1,26 +1,55 @@
 "use client";
 
-import { Box, Typography, Paper, Divider, Button } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
+import {
+  Box,
+  Typography,
+  Paper,
+  Divider,
+  Button,
+  Grid,
+  Container,
+} from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { formatCurrency } from "@/lib/currency";
+import { useCart } from "@/context/CartProvider";
+import { useProduct } from "@/context/ProductProvider";
+import Link from "next/link";
+import { useState } from "react";
 
 export function ConfirmationView() {
-  const product = {
-    name: "Small sushi 8 pieces",
-    price: 115,
-    quantity: 2,
-    image:
-      "https://magnificent-pastelito-7497e6.netlify.app/lovable-uploads/cd3922d0-2f97-48d6-8838-23be0cc03a39.png",
-  };
+  const { totalPrice, clearCart } = useCart();
+  const { products } = useProduct();
+  const [isConfirmed, setIsConfirmed] = useState(false);
+  const orderId = localStorage.getItem("orderId");
+  const paymentDetails = JSON.parse(
+    localStorage.getItem("paymentDetails") || "{}"
+  );
 
-  const payer = {
-    fullName: "John Doe",
-    address: "123 Street, Stockholm, Sweden",
-    phone: "070-1230-1230",
-  };
+  const currentCart = JSON.parse(localStorage.getItem("currentCart") || "{}");
 
-  const totalPrice = product.price * product.quantity;
+  const cartItems = Object.entries(currentCart).map(
+    ([productId, quantity]): {
+      productId: number;
+      productName: string;
+      productImage: string;
+      productPrice: number;
+      quantity: number;
+    } => {
+      const product = products.find((p) => p.productId === Number(productId));
+      return {
+        productId: Number(productId),
+        productName: product?.productName || "Unknown Product",
+        productImage: product?.productImage || "",
+        productPrice: product?.productPrice || 0,
+        quantity: Number(quantity),
+      };
+    }
+  );
+
+  const handleContinue = () => {
+    clearCart();
+    localStorage.removeItem("currentCart");
+  };
 
   return (
     <Box
@@ -33,73 +62,128 @@ export function ConfirmationView() {
         >
           Confirmation
         </Typography>
-
         <Typography variant="body1" sx={{ textAlign: "center" }}>
-          <br /> Order Number: <strong>#12345</strong>
+          <br /> Order Number: <strong>{orderId}</strong>
         </Typography>
 
         <Divider sx={{ borderStyle: "dotted", my: 2 }} />
 
-        <Typography variant="h6" sx={{ mb: 2 }}>
-          Product Details
-        </Typography>
-        <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-          <Image
-            src={product.image}
-            alt={product.name}
-            width={100}
-            height={100}
-            style={{ borderRadius: 8, marginRight: 28 }}
-          />
-          <Box display="flex" flexDirection="column" gap={1}>
-            <Typography variant="body1">
-              <strong>{product.name}</strong>
-            </Typography>
-            <Typography variant="body2">
-              Price: SEK {product.price.toFixed(2)}
-            </Typography>
-            <Typography variant="body2">
-              Quantity: {product.quantity}
-            </Typography>
-            <Typography variant="body2">
-              <strong>Total: SEK {totalPrice.toFixed(2)}</strong>
-            </Typography>
-          </Box>
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h6" sx={{ mb: 2 }}>
+            Product Details
+          </Typography>
+          <Container>
+            {cartItems.map((item) => (
+              <Box key={item.productId} sx={{ my: 2 }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: 2,
+                    alignItems: "center",
+                    border: "1px solid #e0e0e0",
+                    padding: 2,
+                    borderRadius: 2,
+                  }}
+                >
+                  <img
+                    src={item.productImage}
+                    alt={item.productName}
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                      objectFit: "cover",
+                      borderRadius: 5,
+                    }}
+                  />
+                  <Box display="flex" flexDirection="column" gap={1}>
+                    <Typography variant="body1">{item.productName}</Typography>
+                    <Typography variant="body2">
+                      {formatCurrency(item.productPrice)} x {item.quantity}
+                    </Typography>
+                    <Typography variant="h6">
+                      {formatCurrency(item.productPrice * item.quantity)}
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+            ))}
+          </Container>
+
+          <Divider sx={{ borderStyle: "dotted", my: 2 }} />
+          <Typography variant="h6" align="right">
+            Total Price: <strong>{formatCurrency(totalPrice)}</strong>
+          </Typography>
         </Box>
-
-        <Divider sx={{ borderStyle: "dotted", my: 2 }} />
 
         <Typography variant="h6" sx={{ mb: 2 }}>
           Buyer's Details
         </Typography>
         <Box display="flex" flexDirection="column" gap={1}>
           <Typography variant="body1">
-            <strong>Name:</strong> {payer.fullName}
+            <strong>Name:</strong> {paymentDetails.firstName}{" "}
+            {paymentDetails.lastName}
           </Typography>
           <Typography variant="body1">
-            <strong>Address:</strong> {payer.address}
+            <strong>Address:</strong> {paymentDetails.address},{" "}
+            {paymentDetails.city}, {paymentDetails.postCode}
           </Typography>
           <Typography variant="body1">
-            <strong>Phone:</strong> {payer.phone}
+            <strong>Phone:</strong> {paymentDetails.phoneNumber}
           </Typography>
         </Box>
         <Divider sx={{ borderStyle: "dotted", my: 2 }} />
 
-        <Typography variant="body2" sx={{ textAlign: "center", mt: 2 }}>
-          Your order will be processed soon. Thank you for your order!
-        </Typography>
-
+        {isConfirmed && (
+          <Typography
+            variant="body1"
+            sx={{ textAlign: "center", mt: 2, color: "red" }}
+          >
+            Your order will be processed as soon as possible. Thank you for your
+            order!
+          </Typography>
+        )}
         <Box
           display="flex"
-          sx={{ justifyContent: { xs: "center", md: "flex-end" }, mt: 3 }}
+          sx={{ justifyContent: { xs: "center", md: "flex-end" }, mt: 4 }}
         >
-          <Link href="/menu" passHref>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", md: "row" },
+              gap: 2,
+            }}
+          >
+            <Link href="/menu" passHref>
+              <Button
+                variant="contained"
+                size="large"
+                onClick={handleContinue}
+                sx={{
+                  height: 58,
+                  backgroundColor: "primary.main",
+                  color: "common.white",
+                  borderRadius: 5,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                  "&:hover": {
+                    backgroundColor: "#f1f1f1",
+                  },
+                }}
+              >
+                <ArrowBackIosIcon />
+                Continue to order
+              </Button>
+            </Link>
+
             <Button
               variant="contained"
               size="large"
+              onClick={() => setIsConfirmed(true)}
               sx={{
                 height: 58,
-                backgroundColor: "primary.main",
+                backgroundColor: "warning.main",
                 color: "common.white",
                 borderRadius: 5,
                 display: "flex",
@@ -110,10 +194,9 @@ export function ConfirmationView() {
                 },
               }}
             >
-              <ArrowBackIosIcon />
-              Continue to order
+              Confirm order
             </Button>
-          </Link>
+          </Box>
         </Box>
       </Paper>
     </Box>

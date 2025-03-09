@@ -18,7 +18,7 @@ export function ProductItem({
   handleQuantityChange,
   isLast,
 }: ProductItemProps) {
-  const { addProduct, handleOrderNow } = useCart();
+  const { addProduct, handleBuyNow } = useCart();
 
   return (
     <Box
@@ -167,12 +167,7 @@ export function ProductItem({
           <Button
             variant="contained"
             disabled={quantity === 0}
-            onClick={() =>
-              addProduct({
-                ...product,
-                quantity,
-              })
-            }
+            onClick={() => addProduct(product.productId, quantity)}
             sx={{
               width: 150,
               height: 58,
@@ -192,12 +187,7 @@ export function ProductItem({
           <Button
             variant="contained"
             disabled={quantity === 0}
-            onClick={() =>
-              handleOrderNow({
-                ...product,
-                quantity,
-              })
-            }
+            onClick={() => handleBuyNow(product.productId, quantity)}
             sx={{
               width: 150,
               height: 58,
