@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, ReactElement } from "react";
-import { IProductProps } from "@/types/product";
 import Link from "next/link";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import {
@@ -22,10 +21,9 @@ import {
 
 type AddCartProps = {
   id: number;
-  productData: IProductProps;
 };
 
-export function ProductCart({ id, productData }: AddCartProps): ReactElement {
+export function ProductCart({ id }: AddCartProps): ReactElement {
   const [productQuantity, setProductQuantity] = useState(0);
   const [isRemoved, setIsRemoved] = useState(false);
 

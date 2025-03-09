@@ -6,7 +6,6 @@ import {
   Paper,
   Divider,
   Button,
-  Grid,
   Container,
 } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -15,6 +14,7 @@ import { useCart } from "@/context/CartProvider";
 import { useProduct } from "@/context/ProductProvider";
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 export function ConfirmationView() {
   const { totalPrice, clearCart } = useCart();
@@ -93,12 +93,12 @@ export function ConfirmationView() {
                   }}
                 >
                   {item.productImage && (
-                    <img
+                    <Image
                       src={item.productImage}
                       alt={item.productName}
+                      width={100}
+                      height={100}
                       style={{
-                        width: "100px",
-                        height: "100px",
                         objectFit: "cover",
                         borderRadius: 5,
                       }}

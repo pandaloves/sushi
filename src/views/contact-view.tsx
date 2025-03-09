@@ -1,8 +1,7 @@
 "use client";
 
-import { Box, Stack, Typography, Divider } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
-import { BackToTopButton } from "@/components/ui/back-to-top-button";
 
 export function ContactView() {
   return (

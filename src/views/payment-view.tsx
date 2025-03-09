@@ -37,7 +37,7 @@ export function PaymentView() {
   };
 
   const validateForm = () => {
-    let newErrors = { ...errors };
+    const newErrors = { ...errors };
     let formIsValid = true;
 
     if (!formData.firstName) {
@@ -143,7 +143,7 @@ export function PaymentView() {
           throw new Error("Failed to submit payment");
         }
 
-        const result = await response.json();
+        await response.json();
 
         localStorage.setItem("paymentDetails", JSON.stringify(formData));
 

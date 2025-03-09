@@ -1,7 +1,10 @@
-import { IconButton } from "@mui/material";
+import { IconButton, SxProps, Theme } from "@mui/material";
 import { Icon } from "@iconify/react";
 
-export function BackToTopButton({ sx }: any) {
+type BackToTopButtonProps = {
+  sx?: SxProps<Theme>;
+};
+export function BackToTopButton({ sx }: BackToTopButtonProps) {
   return (
     <IconButton
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
