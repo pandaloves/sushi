@@ -10,13 +10,13 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useProduct } from "@/context/ProductProvider";
 import { useCart } from "@/context/CartProvider";
 
-interface CartViewProps {
+type CartViewProps = {
   currentCart: Record<number, number>;
   totalPrice: number;
   clearCart: () => void;
   totalProducts: number;
   cartLength: number;
-}
+};
 
 export function CartView({
   currentCart,
@@ -66,8 +66,8 @@ export function CartView({
 
       {cartLength === 0 ? (
         <Box display="flex" flexDirection="column">
-          <Divider sx={{ my: 5, borderColor: "common.white" }} />
-          <Typography variant="h6" color="common.white" sx={{ mt: 2 }}>
+          <Divider sx={{ mb: 5, borderColor: "common.white" }} />
+          <Typography variant="h6" color="common.white">
             Din varukorg är tom. Börja lägga till din beställning!
           </Typography>
           <Divider sx={{ my: 5, borderColor: "common.white" }} />
