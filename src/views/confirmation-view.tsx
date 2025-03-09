@@ -60,17 +60,17 @@ export function ConfirmationView() {
           variant="h5"
           sx={{ textAlign: "center", borderBottom: "1px dotted black" }}
         >
-          Confirmation
+          Bekräftelse
         </Typography>
         <Typography variant="body1" sx={{ textAlign: "center" }}>
-          <br /> Order Number: <strong>{orderId}</strong>
+          <br /> Ordernummer: <strong>{orderId}</strong>
         </Typography>
 
         <Divider sx={{ borderStyle: "dotted", my: 2 }} />
 
         <Box sx={{ mb: 4 }}>
           <Typography variant="h6" sx={{ mb: 2 }}>
-            Product Details
+            Produktinformation
           </Typography>
           <Container>
             {cartItems.map((item) => (
@@ -86,16 +86,18 @@ export function ConfirmationView() {
                     borderRadius: 2,
                   }}
                 >
-                  <img
-                    src={item.productImage}
-                    alt={item.productName}
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      objectFit: "cover",
-                      borderRadius: 5,
-                    }}
-                  />
+                  {item.productImage && (
+                    <img
+                      src={item.productImage}
+                      alt={item.productName}
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        objectFit: "cover",
+                        borderRadius: 5,
+                      }}
+                    />
+                  )}
                   <Box display="flex" flexDirection="column" gap={1}>
                     <Typography variant="body1">{item.productName}</Typography>
                     <Typography variant="body2">
@@ -110,26 +112,26 @@ export function ConfirmationView() {
             ))}
           </Container>
 
-          <Divider sx={{ borderStyle: "dotted", my: 2 }} />
           <Typography variant="h6" align="right">
-            Total Price: <strong>{formatCurrency(totalPrice)}</strong>
+            Totalt pris: <strong>{formatCurrency(totalPrice)}</strong>
           </Typography>
         </Box>
 
+        <Divider sx={{ borderStyle: "dotted", my: 2 }} />
         <Typography variant="h6" sx={{ mb: 2 }}>
-          Buyer's Details
+          Kunduppgifter
         </Typography>
         <Box display="flex" flexDirection="column" gap={1}>
           <Typography variant="body1">
-            <strong>Name:</strong> {paymentDetails.firstName}{" "}
+            <strong>Namn:</strong> {paymentDetails.firstName}{" "}
             {paymentDetails.lastName}
           </Typography>
           <Typography variant="body1">
-            <strong>Address:</strong> {paymentDetails.address},{" "}
+            <strong>Adress:</strong> {paymentDetails.address},{" "}
             {paymentDetails.city}, {paymentDetails.postCode}
           </Typography>
           <Typography variant="body1">
-            <strong>Phone:</strong> {paymentDetails.phoneNumber}
+            <strong>Telefonnummer:</strong> {paymentDetails.phoneNumber}
           </Typography>
         </Box>
         <Divider sx={{ borderStyle: "dotted", my: 2 }} />
@@ -139,8 +141,8 @@ export function ConfirmationView() {
             variant="body1"
             sx={{ textAlign: "center", mt: 2, color: "red" }}
           >
-            Your order will be processed as soon as possible. Thank you for your
-            order!
+            Din beställning kommer att behandlas så snart som möjligt. Tack för
+            din beställning!
           </Typography>
         )}
         <Box
@@ -173,7 +175,7 @@ export function ConfirmationView() {
                 }}
               >
                 <ArrowBackIosIcon />
-                Continue to order
+                Fortsätt beställa
               </Button>
             </Link>
 
@@ -194,7 +196,7 @@ export function ConfirmationView() {
                 },
               }}
             >
-              Confirm order
+              Bekräfta beställning
             </Button>
           </Box>
         </Box>

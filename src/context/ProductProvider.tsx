@@ -2,7 +2,6 @@
 
 import { IProductProps } from "@/types/product";
 import { baseUrl } from "@/utils/baseUrl";
-import axios from "axios";
 import { useContext, createContext, useState, useEffect } from "react";
 import type { ReactNode, ReactElement } from "react";
 
@@ -24,8 +23,12 @@ export function ProductProvider({
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/product`);
-        setProducts(response.data);
+        const response = await fetch(`${baseUrl}/product`);
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status}`);
+        }
+        const data = await response.json();
+        setProducts(data);
       } catch (error) {
         console.error("API error:", error);
       }

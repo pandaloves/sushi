@@ -31,7 +31,7 @@ export function ShopInfo() {
           fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
         }}
       >
-        Our Story
+        Vår berättelse
       </Typography>
       <Typography
         variant="body2"
@@ -43,11 +43,11 @@ export function ShopInfo() {
           lineHeight: { xs: 1.8, sm: 1.6 },
         }}
       >
-        Since its founding in 2025, Sushi has strived to provide impeccable
-        service and a unique, Asian culinary journey for each of our clients.
-        Our talented team always works with the highest quality in every step
-        and use only fresh, sustainable raw materials. What are you waiting for?
-        Book your table today.
+        Sedan starten 2025 har Sushi strävat efter att erbjuda oklanderligt
+        service och en unik, asiatisk kulinarisk resa för var och en av våra
+        kunder. Vårt duktiga team arbetar alltid med högsta kvalitet i varje
+        steg och använd endast färska, hållbara råvaror. Vad väntar du på? Boka
+        ditt bord idag.
       </Typography>
     </Box>
   );

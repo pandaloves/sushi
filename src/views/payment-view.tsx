@@ -144,7 +144,6 @@ export function PaymentView() {
         }
 
         const result = await response.json();
-        console.log("Payment successful:", result);
 
         localStorage.setItem("paymentDetails", JSON.stringify(formData));
 
@@ -167,7 +166,7 @@ export function PaymentView() {
           gutterBottom
           sx={{ mb: 2, textAlign: "center" }}
         >
-          Payment Details
+          Betalningsinformation
         </Typography>
 
         <Box
@@ -177,7 +176,7 @@ export function PaymentView() {
         >
           <TextField
             fullWidth
-            label="First Name"
+            label="Förnamn"
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
@@ -188,7 +187,7 @@ export function PaymentView() {
 
           <TextField
             fullWidth
-            label="Last Name"
+            label="Efternamn"
             name="lastName"
             value={formData.lastName}
             onChange={handleChange}
@@ -199,7 +198,7 @@ export function PaymentView() {
 
           <TextField
             fullWidth
-            label="Phone Number"
+            label="Telefonnummer"
             name="phoneNumber"
             type="tel"
             value={formData.phoneNumber}
@@ -211,7 +210,7 @@ export function PaymentView() {
 
           <TextField
             fullWidth
-            label="Address"
+            label="Adress"
             name="address"
             value={formData.address}
             onChange={handleChange}
@@ -223,14 +222,14 @@ export function PaymentView() {
           <Box sx={{ display: "flex", gap: 2 }}>
             <TextField
               fullWidth
-              label="City"
+              label="Stad"
               name="city"
               value={formData.city}
               onChange={handleChange}
             />
             <TextField
               fullWidth
-              label="Post Code"
+              label="Postnummer"
               name="postCode"
               value={formData.postCode}
               onChange={handleChange}
@@ -239,7 +238,7 @@ export function PaymentView() {
 
           <TextField
             fullWidth
-            label="Card Number"
+            label="Kortnummer"
             name="cardNumber"
             type="text"
             value={formData.cardNumber}
@@ -252,7 +251,7 @@ export function PaymentView() {
           <Box sx={{ display: "flex", gap: 2 }}>
             <TextField
               fullWidth
-              label="Name on Card"
+              label="Namn på kortet"
               name="nameOnCard"
               value={formData.nameOnCard}
               onChange={handleChange}
@@ -263,7 +262,7 @@ export function PaymentView() {
 
             <TextField
               fullWidth
-              label="Expiration Date (MM/YY)"
+              label="Utgångsdatum(MM/YY)"
               name="expirationDate"
               placeholder="MM/YY"
               value={formData.expirationDate}
@@ -302,7 +301,7 @@ export function PaymentView() {
                 py: 2,
               }}
             >
-              Confirm Payment
+              Bekräfta betalning
               <ArrowForwardIosIcon />
             </Button>
           </Box>

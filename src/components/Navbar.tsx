@@ -28,6 +28,12 @@ export function Navbar() {
     setIsClient(true);
   }, []);
 
+  const menuItems = [
+    { text: "Hem", url: "/" },
+    { text: "Meny", url: "/menu" },
+    { text: "Kontakta oss", url: "/contact" },
+  ];
+
   return (
     <AppBar
       position="fixed"
@@ -82,12 +88,8 @@ export function Navbar() {
             }}
           >
             <List sx={{ width: "100%" }}>
-              {["Home", "Menu", "Contact"].map((text, index) => (
-                <Link
-                  key={index}
-                  href={text === "Home" ? "/" : `/${text.toLowerCase()}`}
-                  passHref
-                >
+              {menuItems.map((item, index) => (
+                <Link key={index} href={item.url} passHref>
                   <ListItem
                     onClick={() => setDrawerOpen(false)}
                     sx={{
@@ -95,7 +97,14 @@ export function Navbar() {
                       textAlign: "center",
                     }}
                   >
-                    <ListItemText primary={text} sx={{ textAlign: "center" }} />
+                    <ListItemText
+                      primary={item.text}
+                      sx={{
+                        textAlign: "center",
+                        fontSize: { xs: "2rem", md: "3rem" },
+                        fontWeight: 700,
+                      }}
+                    />
                   </ListItem>
                 </Link>
               ))}
@@ -113,13 +122,13 @@ export function Navbar() {
             }}
           >
             <Typography variant="body2" color="#fff">
-              Choose
+              Välja
             </Typography>
             <Typography variant="body2" color="#fff">
-              Pay
+              Betala
             </Typography>
             <Typography variant="body2" color="#fff">
-              Fetch
+              Hämta
             </Typography>
           </Box>
         </Box>

@@ -78,7 +78,7 @@ export function Hero() {
               height={30}
             />
             <Typography fontSize={{ xs: "1rem", md: "1.5rem" }}>
-              Open: 09:00 - 22:00 Tuesday - Sunday
+              Öppen: 09:00 - 22:00 tisdag - söndag
             </Typography>
           </Stack>
         </Stack>

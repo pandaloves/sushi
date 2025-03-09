@@ -42,19 +42,19 @@ export function CartTable({
         <TableHead>
           <TableRow>
             <TableCell>
-              <strong>Image</strong>
+              <strong>Bild</strong>
             </TableCell>
             <TableCell>
-              <strong>Details</strong>
+              <strong>Detaljer</strong>
             </TableCell>
             <TableCell>
-              <strong>Quantity</strong>
+              <strong>Antal</strong>
             </TableCell>
             <TableCell>
               <strong>Total</strong>
             </TableCell>
             <TableCell>
-              <strong>Delete</strong>
+              <strong>Radera</strong>
             </TableCell>
           </TableRow>
         </TableHead>
@@ -161,10 +161,10 @@ export function CartTable({
 
       <Box sx={{ p: 2, display: "flex", justifyContent: "flex-end" }}>
         <Typography variant="body2" sx={{ mr: 4 }}>
-          Total Quantities: <strong>{cartProducts}</strong>
+          Totalt antal: <strong>{cartProducts}</strong>
         </Typography>
         <Typography variant="body2">
-          Total Price: <strong>{formatCurrency(totalPrice)}</strong>
+          Totalt pris: <strong>{formatCurrency(totalPrice)}</strong>
         </Typography>
       </Box>
     </TableContainer>

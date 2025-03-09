@@ -16,7 +16,6 @@
     "@mui/icons-material": "^6.4.7",
     "@mui/material": "^6.4.6",
     "@mui/material-nextjs": "^6.4.3",
-    "axios": "^1.8.2",
     "framer-motion": "^12.4.7",
     "next": "15.2.0",
     "react": "^19.0.0",

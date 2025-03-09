@@ -18,7 +18,6 @@ import {
   IconButton,
   TextField,
   Divider,
-  CircularProgress,
 } from "@mui/material";
 
 type AddCartProps = {
@@ -27,19 +26,12 @@ type AddCartProps = {
 };
 
 export function ProductCart({ id, productData }: AddCartProps): ReactElement {
-  const [loading, setLoading] = useState(true);
   const [productQuantity, setProductQuantity] = useState(0);
   const [isRemoved, setIsRemoved] = useState(false);
 
-  const { currentCart, addProduct, deleteProduct, handleProductQuantity } =
-    useCart();
+  const { currentCart, deleteProduct, handleProductQuantity } = useCart();
 
   const quantity = currentCart[id] ?? 0;
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => setLoading(false), 500);
-    return () => clearTimeout(timeoutId);
-  }, []);
 
   useEffect(() => {
     setProductQuantity(quantity);
@@ -66,92 +58,76 @@ export function ProductCart({ id, productData }: AddCartProps): ReactElement {
       }}
     >
       <Box>
-        <h2 style={{ fontSize: "1.2rem", fontWeight: 500 }}>Buy product</h2>
+        <h2 style={{ fontSize: "1.2rem", fontWeight: 500 }}>Köp produkt</h2>
         <Divider sx={{ my: 1 }} />
       </Box>
 
-      {loading ? (
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 2,
-            height: "100%",
-          }}
-        >
-          <CircularProgress
-            color="primary"
-            sx={{ gridColumn: "span 2", justifySelf: "center" }}
-          />
-        </Box>
-      ) : (
-        !isRemoved && (
-          <Box>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 2,
+      {!isRemoved && (
+        <Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 2,
+            }}
+          >
+            <IconButton
+              color="primary"
+              onClick={() => handleProductQuantity(id, "decrement")()}
+              disabled={productQuantity <= 1}
+            >
+              <MdRemove />
+            </IconButton>
+
+            <TextField
+              size="small"
+              type="number"
+              slotProps={{
+                input: { inputProps: { min: 1, max: 100 } },
               }}
+              value={productQuantity}
+              onChange={(e) =>
+                handleProductQuantity(id, Number(e.target.value))()
+              }
+              sx={{ width: 78 }}
+            />
+
+            <IconButton
+              color="primary"
+              onClick={() => handleProductQuantity(id, "increment")()}
+              disabled={productQuantity >= 100}
             >
-              <IconButton
-                color="primary"
-                onClick={() => handleProductQuantity(id, "decrement")()}
-                disabled={productQuantity <= 1}
-              >
-                <MdRemove />
-              </IconButton>
-
-              <TextField
-                size="small"
-                type="number"
-                slotProps={{
-                  input: { inputProps: { min: 1, max: 100 } },
-                }}
-                value={productQuantity}
-                onChange={(e) =>
-                  handleProductQuantity(id, Number(e.target.value))()
-                }
-                sx={{ width: 78 }}
-              />
-
-              <IconButton
-                color="primary"
-                onClick={() => handleProductQuantity(id, "increment")()}
-                disabled={productQuantity >= 100}
-              >
-                <MdAdd />
-              </IconButton>
-            </Box>
-            <Box
-              display="flex"
-              flexDirection={{ xs: "column", md: "row" }}
-              justifyContent="center"
-              alignItems="center"
-              gap={2}
-              sx={{ mt: 3 }}
-            >
-              <Button
-                variant="outlined"
-                startIcon={<MdRemoveShoppingCart />}
-                onClick={handleRemoveProduct}
-              >
-                Remove from cart
-              </Button>
-
-              <Link href="/cart" passHref>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  startIcon={<MdAddShoppingCart />}
-                >
-                  Return to cart
-                </Button>
-              </Link>
-            </Box>
+              <MdAdd />
+            </IconButton>
           </Box>
-        )
+          <Box
+            display="flex"
+            flexDirection={{ xs: "column", md: "row" }}
+            justifyContent="center"
+            alignItems="center"
+            gap={2}
+            sx={{ mt: 3 }}
+          >
+            <Button
+              variant="outlined"
+              startIcon={<MdRemoveShoppingCart />}
+              onClick={handleRemoveProduct}
+            >
+              Ta bort från vagnen
+            </Button>
+
+            <Link href="/cart" passHref>
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<MdAddShoppingCart />}
+              >
+                Återgå till varukorgen
+              </Button>
+            </Link>
+          </Box>
+        </Box>
       )}
 
       {isRemoved && (
@@ -175,7 +151,7 @@ export function ProductCart({ id, productData }: AddCartProps): ReactElement {
               }}
             >
               <ArrowBackIosIcon />
-              Return to Menu
+              Återgå till menyn
             </Button>
           </Link>
         </Box>

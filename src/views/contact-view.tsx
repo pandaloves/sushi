@@ -29,7 +29,7 @@ export function ContactView() {
         }}
       >
         <Typography variant="h3" sx={{ my: 2 }}>
-          Contact us
+          Kontakta oss
         </Typography>
 
         <Stack
@@ -77,7 +77,7 @@ export function ContactView() {
               height={30}
             />
             <Typography fontSize={{ xs: "1rem", md: "1.5rem" }}>
-              Open: 09:00 - 22:00 Tuesday - Sunday
+              Öppen: 09:00 - 22:00 tisdag - söndag
             </Typography>
           </Stack>
         </Stack>

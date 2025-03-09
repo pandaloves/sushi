@@ -181,7 +181,7 @@ export function ProductItem({
               },
             }}
           >
-            Add To Cart
+            Lägg till varukorgen
           </Button>
 
           <Button
@@ -201,7 +201,7 @@ export function ProductItem({
               },
             }}
           >
-            Order Now
+            Beställ nu
           </Button>
         </Box>
       </Box>

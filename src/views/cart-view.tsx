@@ -59,7 +59,7 @@ export function CartView({
             startIcon={<MdDeleteSweep />}
             onClick={clearCart}
           >
-            Clear Cart
+            Rensa vagnen
           </Button>
         )}
       </Stack>
@@ -68,7 +68,7 @@ export function CartView({
         <Box display="flex" flexDirection="column">
           <Divider sx={{ my: 5, borderColor: "common.white" }} />
           <Typography variant="h6" color="common.white" sx={{ mt: 2 }}>
-            Your cart is empty. Start adding your order!
+            Din varukorg är tom. Börja lägga till din beställning!
           </Typography>
           <Divider sx={{ my: 5, borderColor: "common.white" }} />
 
@@ -85,7 +85,7 @@ export function CartView({
                   width: { xs: "100%", md: "auto" },
                 }}
               >
-                Return to menu
+                Återgå till menyn
               </Button>
             </Link>
           </Box>
@@ -123,7 +123,7 @@ export function CartView({
                     width: { xs: "100%", md: "auto" },
                   }}
                 >
-                  Return to menu
+                  Återgå till menyn
                 </Button>
               </Link>
 
@@ -139,7 +139,7 @@ export function CartView({
                   width: { xs: "100%", md: "auto" },
                 }}
               >
-                Checkout
+                Kassa
               </Button>
             </Box>
           </Stack>

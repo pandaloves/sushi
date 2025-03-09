@@ -7,7 +7,7 @@ const styles = {
     height: 40,
     borderRadius: "50%",
     border: "1px solid rgba(177, 175, 175, 0.7)",
-    backgroundColor: "#fff",
+    backgroundColor: "#fa8203",
     color: "#000",
     fontSize: 16,
     fontWeight: "bold",

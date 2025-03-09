@@ -43,7 +43,7 @@ export function SearchInput({
             value={searchTerm}
             onChange={handleSearchChange}
             onKeyDown={(e) => e.key === "Enter" && handleSearchSubmit()}
-            placeholder="Search..."
+            placeholder="Sök..."
             sx={{
               ml: 1,
               flex: 1,

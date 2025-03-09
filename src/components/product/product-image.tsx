@@ -7,7 +7,7 @@ import { Box, CircularProgress } from "@mui/material";
 type ImageLoaderProps = {
   src: string;
   alt: string;
-  width?: number; 
+  width?: number;
   height?: number;
   divStyle?: React.CSSProperties;
   objectFit?: "fill" | "contain" | "cover" | "none" | "scale-down";
