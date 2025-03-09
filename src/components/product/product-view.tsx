@@ -72,7 +72,7 @@ export function ProductView({ productData }: ProductViewProps): ReactElement {
           description={productDescription}
         />
 
-        <ProductCart id={productId} productData={productData} />
+        <ProductCart id={productId} />
       </Box>
     </Box>
   );
