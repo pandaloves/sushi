@@ -48,14 +48,14 @@ export function Hero() {
               width={30}
               height={30}
             />
-            <Typography fontSize={{ xs: "1rem", md: "1.5rem" }}>
+            <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
               123 Stora Gatan, Stockholm
             </Typography>
           </Stack>
 
           <Stack direction="row" alignItems="center" spacing={2}>
             <Icon icon="material-symbols:call-outline" width={30} height={30} />
-            <Typography fontSize={{ xs: "1rem", md: "1.5rem" }}>
+            <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
               07012307890
             </Typography>
           </Stack>
@@ -66,7 +66,7 @@ export function Hero() {
               width={30}
               height={30}
             />
-            <Typography fontSize={{ xs: "1rem", md: "1.5rem" }}>
+            <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
               Genomsnittlig tillverkningstid 20 minuter
             </Typography>
           </Stack>
@@ -77,7 +77,7 @@ export function Hero() {
               width={30}
               height={30}
             />
-            <Typography fontSize={{ xs: "1rem", md: "1.5rem" }}>
+            <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
               Öppet: 09:00 - 22:00 tisdag - söndag
             </Typography>
           </Stack>
