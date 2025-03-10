@@ -67,7 +67,7 @@ export function Hero() {
               height={30}
             />
             <Typography fontSize={{ xs: "1rem", md: "1.5rem" }}>
-              Average waiting time: 25 minutes
+              Genomsnittlig tillverkningstid 20 minuter
             </Typography>
           </Stack>
 
