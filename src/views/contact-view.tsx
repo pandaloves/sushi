@@ -71,7 +71,7 @@ export function ContactView() {
 
           <Stack direction="row" alignItems="center" spacing={2}>
             <Icon
-              icon="material-symbols-light:room-service-outline"
+              icon="material-symbols:nest-clock-farsight-analog-outline"
               width={30}
               height={30}
             />
