@@ -31,7 +31,9 @@ export function ProductItem({
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#000",
-        padding: { xs: 2, md: 4 },
+        px: { xs: 2, md: 4 },
+        pt: 4,
+        pb: 6,
         borderBottom: isLast ? "none" : "2px dotted white",
       }}
     >
