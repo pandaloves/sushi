@@ -37,7 +37,7 @@ export function ShopInfo() {
         variant="body2"
         sx={{
           color: "common.white",
-          maxWidth: { xs: "90%", sm: "600px" },
+          maxWidth: { xs: "90%", sm: "580px" },
           textShadow: "1px 1px 2px rgba(0,0,0,0.8)",
           fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
           lineHeight: { xs: 1.8, sm: 1.6 },
