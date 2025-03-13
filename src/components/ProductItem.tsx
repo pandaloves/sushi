@@ -127,16 +127,17 @@ export function ProductItem({
             <TextField
               type="number"
               value={quantity}
-              label="Quantity" 
+              label="Quantity"
               onChange={(e) =>
                 handleQuantityChange(product.productId, Number(e.target.value))
               }
               sx={{
-                width: 60,
+                width: 100,
                 borderRadius: 5,
                 backgroundColor: "common.white",
                 "& input": {
                   textAlign: "center",
+                  width: "100%",
                 },
                 "& input[type=number]::-webkit-inner-spin-button": {
                   WebkitAppearance: "none",
@@ -152,6 +153,9 @@ export function ProductItem({
               }}
               slotProps={{
                 input: { inputProps: { min: 0 } },
+                inputLabel: {
+                  sx: { color: "#fa8203", fontSize: 20, fontWeight: 700 },
+                },
               }}
             />
 

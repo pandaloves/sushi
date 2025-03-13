@@ -122,13 +122,13 @@ export function CartTable({
                     type="number"
                     label="Quantity"
                     slotProps={{
-                      input: { inputProps: { min: 1, max: 100 } },
+                      input: { inputProps: { min: 1, max: 200 } },
                     }}
                     value={quantity}
                     onChange={(e) =>
                       handleProductQuantity(productId, Number(e.target.value))()
                     }
-                    sx={{ width: 78 }}
+                    sx={{ width: 80 }}
                   />
 
                   <IconButton
