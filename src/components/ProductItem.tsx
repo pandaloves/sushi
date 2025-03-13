@@ -4,6 +4,7 @@ import { Box, Button, Typography, TextField, IconButton } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
 import { IProductProps } from "@/types/product";
 import { useCart } from "@/context/CartProvider";
+import Image from "next/image";
 
 type ProductItemProps = {
   product: IProductProps;
@@ -39,27 +40,24 @@ export function ProductItem({
     >
       <Box
         sx={{
-          flex: { md: 1 },
-          height: { xs: 250, md: "80%" },
-          width: { xs: "100%", md: "40%" },
+          width: { xs: "90%", md: "46%" },
+          border: "1px solid #ddd",
+          borderRadius: 8,
+          overflow: "hidden",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          marginBottom: { xs: 2, md: 0 },
-          overflow: "hidden",
+          mb: 2,
         }}
       >
-        <Box
-          component="img"
+        <Image
           src={product.productImage}
           alt={product.productName}
-          sx={{
-            width: { xs: "100%", sm: "80%" },
-            height: { md: "100%" },
-            maxHeight: 380,
+          width={380}
+          height={280}
+          style={{
+            width: "100%",
             objectFit: "cover",
-            border: "1px solid #ddd",
-            borderRadius: 8,
           }}
         />
       </Box>

@@ -2,6 +2,7 @@
 
 import { Box, Stack, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
+import Image from "next/image";
 
 export function Hero() {
   return (
@@ -30,14 +31,13 @@ export function Hero() {
           color: "common.white",
         }}
       >
-        <Box
-          component="img"
+        <Image
           src="/images/logo.png"
-          sx={{
-            width: { xs: 50, sm: 80, md: 100 },
-            height: { xs: 50, sm: 80, md: 100 },
+          alt="Logo"
+          width={100}
+          height={100}
+          style={{
             borderRadius: "50%",
-            mx: "auto",
           }}
         />
 
