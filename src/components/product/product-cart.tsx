@@ -83,7 +83,7 @@ export function ProductCart({ id }: AddCartProps): ReactElement {
             <TextField
               size="small"
               type="number"
-              aria-label="Product quantity"
+              label="Quantity" 
               slotProps={{
                 input: { inputProps: { min: 1, max: 100 } },
               }}
