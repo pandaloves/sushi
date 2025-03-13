@@ -40,7 +40,7 @@ export function ProductItem({
     >
       <Box
         sx={{
-          width: { xs: "90%", md: "46%" },
+          width: { xs: "90%", md: "46%", lg: "32%" },
           border: "1px solid #ddd",
           borderRadius: 8,
           overflow: "hidden",
