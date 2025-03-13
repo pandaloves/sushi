@@ -23,7 +23,7 @@ export function ShopInfo() {
       }}
     >
       <Typography
-        variant="h5"
+        variant="h3"
         sx={{
           color: "common.white",
           mb: { xs: 1, sm: 2 },

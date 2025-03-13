@@ -112,6 +112,7 @@ export function CartTable({
                       handleProductQuantity(productId, "decrement")()
                     }
                     disabled={quantity <= 1}
+                    aria-label="Decrease quantity"
                   >
                     <MdRemove />
                   </IconButton>
@@ -119,6 +120,7 @@ export function CartTable({
                   <TextField
                     size="small"
                     type="number"
+                    label="Quantity"
                     slotProps={{
                       input: { inputProps: { min: 1, max: 100 } },
                     }}
@@ -131,6 +133,7 @@ export function CartTable({
 
                   <IconButton
                     color="primary"
+                    aria-label="Increase quantity"
                     onClick={() =>
                       handleProductQuantity(productId, "increment")()
                     }

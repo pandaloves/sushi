@@ -67,7 +67,7 @@ export function SearchInput({
                 textAlign: "center",
               }}
             >
-              No product found with that name.
+              Ingen produkt hittades med det namnet.
             </Typography>
           )}
         </Box>

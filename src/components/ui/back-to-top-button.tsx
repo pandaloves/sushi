@@ -10,6 +10,7 @@ export function BackToTopButton({ sx }: BackToTopButtonProps) {
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       color="default"
       size="small"
+      aria-label="Scroll to top"
       sx={{
         border: "1px solid #fff",
         backgroundColor: "transparent",

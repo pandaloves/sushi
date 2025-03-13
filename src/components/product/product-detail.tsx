@@ -29,7 +29,7 @@ export function ProductDetail({
       }}
     >
       <Box>
-        <Typography variant="h5" fontWeight={700}>
+        <Typography variant="h3" fontWeight={700}>
           {name}
         </Typography>
       </Box>

@@ -75,7 +75,7 @@ export function ProductItem({
         }}
       >
         <Typography
-          variant="h4"
+          variant="h2"
           sx={{
             mb: 2,
             fontSize: { xs: "1.5rem", md: "2rem" },
@@ -83,6 +83,17 @@ export function ProductItem({
           }}
         >
           {product.productName}
+        </Typography>
+
+        <Typography
+          variant="h3"
+          sx={{
+            mb: 2,
+            fontSize: { xs: "1.25rem", md: "1.5rem" },
+            color: "common.white",
+          }}
+        >
+          {product.productPrice} SEK
         </Typography>
 
         <Typography
@@ -97,17 +108,6 @@ export function ProductItem({
           {product.productDescription}
         </Typography>
 
-        <Typography
-          variant="h6"
-          sx={{
-            mb: 2,
-            fontSize: { xs: "1.25rem", md: "1.5rem" },
-            color: "common.white",
-          }}
-        >
-          {product.productPrice} SEK
-        </Typography>
-
         <Box
           display="flex"
           flexDirection={{ xs: "column", md: "row" }}
@@ -120,12 +120,14 @@ export function ProductItem({
                 handleQuantityChange(product.productId, quantity - 1)
               }
               sx={{ border: "1px solid #ddd", color: "#fff" }}
+              aria-label="Decrease quantity"
             >
               <Remove />
             </IconButton>
             <TextField
               type="number"
               value={quantity}
+              aria-label="Product quantity"
               onChange={(e) =>
                 handleQuantityChange(product.productId, Number(e.target.value))
               }
@@ -158,6 +160,7 @@ export function ProductItem({
                 handleQuantityChange(product.productId, quantity + 1)
               }
               sx={{ border: "1px solid #ddd", color: "common.white" }}
+              aria-label="Increase quantity"
             >
               <Add />
             </IconButton>

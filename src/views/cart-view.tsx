@@ -46,10 +46,10 @@ export function CartView({
         alignItems="center"
         sx={{ mb: 3 }}
       >
-        <Typography variant="h5" fontWeight="bold">
+        <Typography variant="h3" fontWeight="bold">
           {cartLength > 0
             ? `${cartLength} product${cartLength > 1 ? "s" : ""}`
-            : "No products in cart"}
+            : "Inga produkter i varukorgen"}
         </Typography>
 
         {cartLength > 0 && (
