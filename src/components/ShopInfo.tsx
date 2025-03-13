@@ -43,11 +43,10 @@ export function ShopInfo() {
           lineHeight: { xs: 1.8, sm: 1.6 },
         }}
       >
-        Sedan starten 2025 har Sushi strävat efter att erbjuda oklanderligt
-        service och en unik, asiatisk kulinarisk resa för var och en av våra
-        kunder. Vårt duktiga team arbetar alltid med högsta kvalitet i varje
-        steg och använd endast färska, hållbara råvaror. Vad väntar du på? Boka
-        ditt bord idag.
+        Sedan 2025 har Sushi jobbat för att ge dig fantastisk service och en
+        unik asiatisk matupplevelse. Vårt skickliga team använder alltid färska
+        och hållbara ingredienser för bästa kvalitet. Vad väntar du på? Beställ
+        nu!
       </Typography>
     </Box>
   );
