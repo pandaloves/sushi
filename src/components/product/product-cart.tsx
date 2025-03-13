@@ -75,6 +75,7 @@ export function ProductCart({ id }: AddCartProps): ReactElement {
               color="primary"
               onClick={() => handleProductQuantity(id, "decrement")()}
               disabled={productQuantity <= 1}
+              aria-label="Decrease quantity"
             >
               <MdRemove />
             </IconButton>
@@ -82,6 +83,7 @@ export function ProductCart({ id }: AddCartProps): ReactElement {
             <TextField
               size="small"
               type="number"
+              aria-label="Product quantity"
               slotProps={{
                 input: { inputProps: { min: 1, max: 100 } },
               }}
@@ -96,6 +98,7 @@ export function ProductCart({ id }: AddCartProps): ReactElement {
               color="primary"
               onClick={() => handleProductQuantity(id, "increment")()}
               disabled={productQuantity >= 100}
+              aria-label="Increase quantity"
             >
               <MdAdd />
             </IconButton>

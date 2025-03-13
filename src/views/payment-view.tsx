@@ -162,7 +162,7 @@ export function PaymentView() {
         sx={{ mt: 10, mb: 8, p: 4, maxWidth: 580, width: "100%" }}
       >
         <Typography
-          variant="h5"
+          variant="h3"
           gutterBottom
           sx={{ mb: 2, textAlign: "center" }}
         >

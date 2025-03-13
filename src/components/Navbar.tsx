@@ -61,6 +61,7 @@ export function Navbar() {
         <IconButton
           edge="start"
           color="inherit"
+          aria-label="Open menu"
           onClick={() => setDrawerOpen(true)}
           sx={{ position: "relative" }}
         >
@@ -124,7 +125,8 @@ export function Navbar() {
             <Typography
               sx={{
                 fontSize: { xs: "body2", md: "h6" },
-                color: "common.white",
+                color: "#FFFFFF",
+                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.6)",
               }}
             >
               Välja
@@ -132,7 +134,8 @@ export function Navbar() {
             <Typography
               sx={{
                 fontSize: { xs: "body2", md: "h6" },
-                color: "common.white",
+                color: "#FFFFFF",
+                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.6)",
               }}
             >
               Betala
@@ -140,7 +143,8 @@ export function Navbar() {
             <Typography
               sx={{
                 fontSize: { xs: "body2", md: "h6" },
-                color: "common.white",
+                color: "#FFFFFF",
+                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.6)",
               }}
             >
               Hämta
@@ -148,7 +152,7 @@ export function Navbar() {
           </Box>
         </Box>
         <Link href="/cart">
-          <IconButton color="inherit">
+          <IconButton color="inherit" aria-label="Open shopping cart">
             <Badge
               badgeContent={isClient ? cartProducts : 0}
               color="error"

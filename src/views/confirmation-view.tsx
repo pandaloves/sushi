@@ -63,7 +63,7 @@ export function ConfirmationView() {
     >
       <Paper elevation={3} sx={{ p: 4, maxWidth: 680, width: "100%" }}>
         <Typography
-          variant="h5"
+          variant="h3"
           sx={{ textAlign: "center", borderBottom: "1px dotted black" }}
         >
           Bekräftelse

@@ -14,6 +14,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>Sushi</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet="UTF-8" />
+        <meta name="description" content="Bästa sushi" />
+      </head>
       <body>
         <AppRouterCacheProvider>
           <ThemeRegistry>

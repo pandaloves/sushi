@@ -32,13 +32,12 @@ export function Hero() {
         }}
       >
         <Image
-          src="/images/logo.png"
+          src="/images/logo.webp"
           alt="Logo"
           width={100}
           height={100}
-          style={{
-            borderRadius: "50%",
-          }}
+          priority
+          style={{ borderRadius: "50%" }}
         />
 
         <Stack direction="column" alignItems="start" marginTop={-1} gap={1}>
