@@ -127,7 +127,7 @@ export function ProductItem({
             <TextField
               type="number"
               value={quantity}
-              aria-label="Product quantity"
+              label="Quantity" 
               onChange={(e) =>
                 handleQuantityChange(product.productId, Number(e.target.value))
               }
