@@ -69,8 +69,8 @@ export const Hero = memo(function Hero() {
           <Stack direction="row" alignItems="center" spacing={2}>
             <Icon
               icon="material-symbols:location-on-outline"
-              width={30}
-              height={30}
+              width={26}
+              height={26}
               aria-label="Location Icon"
             />
             <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
@@ -81,8 +81,8 @@ export const Hero = memo(function Hero() {
           <Stack direction="row" alignItems="center" spacing={2}>
             <Icon
               icon="material-symbols:call-outline"
-              width={30}
-              height={30}
+              width={26}
+              height={26}
               aria-label="Phone Icon"
             />
             <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
@@ -93,8 +93,8 @@ export const Hero = memo(function Hero() {
           <Stack direction="row" alignItems="center" spacing={2}>
             <Icon
               icon="material-symbols-light:room-service-outline"
-              width={30}
-              height={30}
+              width={26}
+              height={26}
               aria-label="Service Icon"
             />
             <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
@@ -105,8 +105,8 @@ export const Hero = memo(function Hero() {
           <Stack direction="row" alignItems="center" spacing={2}>
             <Icon
               icon="material-symbols:nest-clock-farsight-analog-outline"
-              width={30}
-              height={30}
+              width={26}
+              height={26}
               aria-label="Opening Hours Icon"
             />
             <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
