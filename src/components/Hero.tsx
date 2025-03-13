@@ -1,10 +1,33 @@
 "use client";
 
+import { memo } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
-export function Hero() {
+export const Hero = memo(function Hero() {
+  const [isVisible, setIsVisible] = useState(false);
+  const iframeRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (iframeRef.current) {
+      observer.observe(iframeRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <Box
       display="flex"
@@ -34,18 +57,21 @@ export function Hero() {
         <Image
           src="/images/logo.webp"
           alt="Logo"
-          width={100}
-          height={100}
+          width={70}
+          height={70}
           priority
+          placeholder="blur"
+          blurDataURL="/images/logo-blur.webp"
           style={{ borderRadius: "50%" }}
         />
 
-        <Stack direction="column" alignItems="start" marginTop={-1} gap={1}>
+        <Stack direction="column" alignItems="start" gap={1}>
           <Stack direction="row" alignItems="center" spacing={2}>
             <Icon
               icon="material-symbols:location-on-outline"
               width={30}
               height={30}
+              aria-label="Location Icon"
             />
             <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
               123 Stora Gatan, Stockholm
@@ -53,7 +79,12 @@ export function Hero() {
           </Stack>
 
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Icon icon="material-symbols:call-outline" width={30} height={30} />
+            <Icon
+              icon="material-symbols:call-outline"
+              width={30}
+              height={30}
+              aria-label="Phone Icon"
+            />
             <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
               07012307890
             </Typography>
@@ -64,6 +95,7 @@ export function Hero() {
               icon="material-symbols-light:room-service-outline"
               width={30}
               height={30}
+              aria-label="Service Icon"
             />
             <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
               Genomsnittlig tillverkningstid 20 minuter
@@ -75,6 +107,7 @@ export function Hero() {
               icon="material-symbols:nest-clock-farsight-analog-outline"
               width={30}
               height={30}
+              aria-label="Opening Hours Icon"
             />
             <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
               Öppet: 09:00 - 22:00 tisdag - söndag
@@ -83,20 +116,24 @@ export function Hero() {
         </Stack>
       </Box>
 
-      <iframe
-        src="https://player.vimeo.com/video/1062717453?h=eacb2b06c0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;muted=1&amp;background=1"
-        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          objectFit: "cover",
-          zIndex: 1,
-        }}
-        title="hero"
-      />
+      <div ref={iframeRef}>
+        {isVisible && (
+          <iframe
+            src="https://player.vimeo.com/video/1062717453?h=eacb2b06c0&badge=0&autopause=0&player_id=0&app_id=58479&muted=1&background=1&dnt=1"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              zIndex: 1,
+            }}
+            title="hero"
+          />
+        )}
+      </div>
     </Box>
   );
-}
+});
