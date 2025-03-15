@@ -1,15 +1,46 @@
 "use client";
 
 import { Box, Typography } from "@mui/material";
+import { useState, useEffect, useRef } from "react";
 
 export function ShopInfo() {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const boxRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = new Image();
+          img.src = "/images/story.avif";
+          img.onload = () => {
+            setImageLoaded(true);
+          };
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {});
+
+    if (boxRef.current) {
+      observer.observe(boxRef.current);
+    }
+
+    return () => {
+      if (boxRef.current) {
+        observer.unobserve(boxRef.current);
+      }
+    };
+  }, []);
+
   return (
     <Box
+      ref={boxRef}
       sx={{
         height: "100vh",
         width: "100vw",
         textAlign: "center",
-        backgroundImage: "url(/images/story.avif)",
+        backgroundImage: imageLoaded ? "url(/images/story.avif)" : "none",
+        backgroundColor: "rgba(0, 0, 0, 0.3)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -20,6 +51,7 @@ export function ShopInfo() {
         overflow: "hidden",
         position: "relative",
         m: 0,
+        transition: "background-image 0.5s ease",
       }}
     >
       <Typography
