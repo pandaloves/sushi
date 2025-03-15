@@ -39,6 +39,21 @@ export const Hero = memo(function Hero() {
         overflow: "hidden",
       }}
     >
+      {!videoLoaded && (
+        <img
+          src="/images/video image.png"
+          alt="Hero Background"
+          width="100%"
+          height="100%"
+          style={{
+            objectFit: "cover",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: 1,
+          }}
+        />
+      )}
       {videoLoaded && (
         <video
           autoPlay
@@ -55,7 +70,7 @@ export const Hero = memo(function Hero() {
             zIndex: 1,
           }}
         >
-          <source src="/videos/hero.webm" type="video/webm" />
+          <source src="/videos/hero-optimized.webm" type="video/webm" />
         </video>
       )}
     </Box>
