@@ -1,13 +1,33 @@
 "use client";
 
-import { memo } from "react";
-import { Box, Stack, Typography } from "@mui/material";
-import { Icon } from "@iconify/react";
-import Image from "next/image";
+import { memo, useEffect, useRef, useState } from "react";
+import { Box } from "@mui/material";
 
 export const Hero = memo(function Hero() {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const heroRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!heroRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVideoLoaded(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(heroRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <Box
+      ref={heroRef}
       display="flex"
       alignItems="center"
       justifyContent="center"
@@ -19,95 +39,25 @@ export const Hero = memo(function Hero() {
         overflow: "hidden",
       }}
     >
-      <Box
-        display="flex"
-        alignItems="center"
-        flexDirection="column"
-        sx={{
-          px: 2,
-          py: 16,
-          zIndex: 2,
-          textAlign: "center",
-          position: "relative",
-          color: "common.white",
-        }}
-      >
-        <Image
-          src="/images/logo.webp"
-          alt="Logo"
-          width={70}
-          height={70}
-          priority
-          style={{ borderRadius: "50%" }}
-        />
-
-        <Stack direction="column" alignItems="start" gap={1}>
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <Icon
-              icon="material-symbols:location-on-outline"
-              width={26}
-              height={26}
-              aria-label="Location Icon"
-            />
-            <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
-              123 Stora Gatan, Stockholm
-            </Typography>
-          </Stack>
-
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <Icon
-              icon="material-symbols:call-outline"
-              width={26}
-              height={26}
-              aria-label="Phone Icon"
-            />
-            <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
-              07012307890
-            </Typography>
-          </Stack>
-
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <Icon
-              icon="material-symbols-light:room-service-outline"
-              width={26}
-              height={26}
-              aria-label="Service Icon"
-            />
-            <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
-              Genomsnittlig tillverkningstid 20 minuter
-            </Typography>
-          </Stack>
-
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <Icon
-              icon="material-symbols:nest-clock-farsight-analog-outline"
-              width={26}
-              height={26}
-              aria-label="Opening Hours Icon"
-            />
-            <Typography fontSize={{ xs: "0.9rem", md: "1.5rem" }}>
-              Öppet: 09:00 - 22:00 tisdag - söndag
-            </Typography>
-          </Stack>
-        </Stack>
-      </Box>
-
-      <video
-        autoPlay
-        loop
-        muted
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          zIndex: 1,
-        }}
-      >
-        <source src="/videos/hero.mp4" type="video/mp4" />
-      </video>
+      {videoLoaded && (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            zIndex: 1,
+          }}
+        >
+          <source src="/videos/hero.webm" type="video/webm" />
+        </video>
+      )}
     </Box>
   );
 });
