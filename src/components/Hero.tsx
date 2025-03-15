@@ -4,30 +4,8 @@ import { memo } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
 
 export const Hero = memo(function Hero() {
-  const [isVisible, setIsVisible] = useState(false);
-  const iframeRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (iframeRef.current) {
-      observer.observe(iframeRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <Box
       display="flex"
@@ -60,8 +38,6 @@ export const Hero = memo(function Hero() {
           width={70}
           height={70}
           priority
-          placeholder="blur"
-          blurDataURL="/images/logo-blur.webp"
           style={{ borderRadius: "50%" }}
         />
 
@@ -116,24 +92,22 @@ export const Hero = memo(function Hero() {
         </Stack>
       </Box>
 
-      <div ref={iframeRef}>
-        {isVisible && (
-          <iframe
-            src="https://player.vimeo.com/video/1062717453?h=eacb2b06c0&badge=0&autopause=0&player_id=0&app_id=58479&muted=1&background=1&dnt=1"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              zIndex: 1,
-            }}
-            title="hero"
-          />
-        )}
-      </div>
+      <video
+        autoPlay
+        loop
+        muted
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: 1,
+        }}
+      >
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
     </Box>
   );
 });
