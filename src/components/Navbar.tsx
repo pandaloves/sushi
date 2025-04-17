@@ -119,7 +119,7 @@ export function Navbar() {
             sx={{
               display: "flex",
               flexDirection: "row",
-              gap: { xs: 4, md: 5 },
+              gap: { xs: 4.5, md: 6 },
             }}
           >
             <Typography
