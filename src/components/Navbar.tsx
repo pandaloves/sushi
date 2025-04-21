@@ -102,7 +102,7 @@ export function Navbar() {
                       primary={item.text}
                       sx={{
                         textAlign: "center",
-                        fontSize: { xs: "2rem", md: "3rem" },
+                        fontSize: { xs: "3rem", md: "4rem" },
                         fontWeight: 700,
                       }}
                     />
