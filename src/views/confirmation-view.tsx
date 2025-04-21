@@ -8,13 +8,13 @@ import {
   Button,
   Container,
 } from "@mui/material";
+import Link from "next/link";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { formatCurrency } from "@/lib/currency";
 import { useCart } from "@/context/CartProvider";
 import { useProduct } from "@/context/ProductProvider";
 import { useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 export function ConfirmationView() {
   const { totalPrice, clearCart } = useCart();
@@ -49,12 +49,7 @@ export function ConfirmationView() {
   const handleContinue = () => {
     clearCart();
     localStorage.removeItem("currentCart");
-    setTimeout(() => {
-      router.push("/menu");
-    }, 3000);
   };
-
-  const router = useRouter();
 
   return (
     <Box
@@ -167,51 +162,54 @@ export function ConfirmationView() {
               gap: 2,
             }}
           >
-            <Button
-              variant="contained"
-              size="large"
-              onClick={handleContinue}
-              sx={{
-                height: 58,
-                backgroundColor: "primary.main",
-                color: "common.white",
-                borderRadius: 5,
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                "&:hover": {
-                  backgroundColor: "#f1f1f1",
-                },
-              }}
-            >
-              <ArrowBackIosIcon />
-              Fortsätt beställa
-            </Button>
+            {isConfirmed && (
+              <Link href="/menu" passHref>
+                <Button
+                  variant="contained"
+                  size="large"
+                  onClick={handleContinue}
+                  sx={{
+                    height: 58,
+                    backgroundColor: "primary.main",
+                    color: "common.white",
+                    borderRadius: 5,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    "&:hover": {
+                      backgroundColor: "#f1f1f1",
+                    },
+                  }}
+                >
+                  <ArrowBackIosIcon />
+                  Fortsätt beställa
+                </Button>
+              </Link>
+            )}
 
-            <Button
-              variant="contained"
-              size="large"
-              onClick={() => {
-                setIsConfirmed(true);
-                setTimeout(() => {
-                  router.push("/");
-                }, 3000);
-              }}
-              sx={{
-                height: 58,
-                backgroundColor: "warning.main",
-                color: "common.white",
-                borderRadius: 5,
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                "&:hover": {
-                  backgroundColor: "#f1f1f1",
-                },
-              }}
-            >
-              Bekräfta beställning
-            </Button>
+            {!isConfirmed && (
+              <Button
+                variant="contained"
+                size="large"
+                onClick={() => {
+                  setIsConfirmed(true);
+                }}
+                sx={{
+                  height: 58,
+                  backgroundColor: "warning.main",
+                  color: "common.white",
+                  borderRadius: 5,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                  "&:hover": {
+                    backgroundColor: "#f1f1f1",
+                  },
+                }}
+              >
+                Bekräfta beställning
+              </Button>
+            )}
           </Box>
         </Box>
       </Paper>
