@@ -109,7 +109,7 @@ export function ConfirmationView() {
                     <Typography variant="body2">
                       {formatCurrency(item.productPrice)} x {item.quantity}
                     </Typography>
-                    <Typography variant="h6">
+                    <Typography variant="subtitle1">
                       {formatCurrency(item.productPrice * item.quantity)}
                     </Typography>
                   </Box>
