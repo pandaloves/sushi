@@ -96,8 +96,8 @@ export function ConfirmationView() {
                     <Image
                       src={item.productImage}
                       alt={item.productName}
-                      width={100}
-                      height={100}
+                      width={90}
+                      height={90}
                       style={{
                         objectFit: "cover",
                         borderRadius: 5,
@@ -106,11 +106,11 @@ export function ConfirmationView() {
                   )}
                   <Box display="flex" flexDirection="column" gap={1}>
                     <Typography variant="body1">{item.productName}</Typography>
-                    <Typography variant="body2">
-                      {formatCurrency(item.productPrice)} x {item.quantity}
-                    </Typography>
                     <Typography variant="subtitle1">
-                      {formatCurrency(item.productPrice * item.quantity)}
+                      Pris: {item.productPrice}
+                    </Typography>
+                    <Typography variant="body2">
+                      Antal: {item.quantity}
                     </Typography>
                   </Box>
                 </Box>
