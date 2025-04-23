@@ -39,7 +39,7 @@ export function CartView({
   });
 
   return (
-    <Box sx={{ mt: 16, mb: 6, p: 4 }}>
+    <Box sx={{ mt: { xs: 12, md: 16 }, mb: 6, p: 4 }}>
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -65,7 +65,11 @@ export function CartView({
       </Stack>
 
       {cartLength === 0 ? (
-        <Box display="flex" flexDirection="column">
+        <Box
+          display="flex"
+          flexDirection="column"
+          sx={{ mt: { xs: -16, sm: -8, md: -6 } }}
+        >
           <Divider sx={{ mb: 5, borderColor: "common.white" }} />
           <Typography variant="h6" color="common.white">
             Din varukorg är tom. Börja lägga till din beställning!
