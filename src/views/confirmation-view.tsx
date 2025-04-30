@@ -68,6 +68,7 @@ export function ConfirmationView() {
         >
           Bekräftelse
         </Typography>
+        
         <Typography variant="body1" sx={{ textAlign: "center" }}>
           <br /> Ordernummer: <strong>{orderId}</strong>
         </Typography>
