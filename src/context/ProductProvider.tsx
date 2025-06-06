@@ -1,9 +1,15 @@
 "use client";
 
 import { IProductProps } from "@/types/product";
-import { baseUrl } from "@/utils/baseUrl";
-import { useContext, createContext, useState, useEffect } from "react";
-import type { ReactNode, ReactElement } from "react";
+import { products as productsData } from "@/utils/products";
+import {
+  useContext,
+  createContext,
+  useState,
+  useEffect,
+  ReactNode,
+  ReactElement,
+} from "react";
 
 type ProductContextType = {
   products: IProductProps[];
@@ -21,17 +27,8 @@ export function ProductProvider({
   const [products, setProducts] = useState<IProductProps[]>([]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch(`${baseUrl}/product`);
-        if (!response.ok) {
-          throw new Error(`API error: ${response.status}`);
-        }
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("API error:", error);
-      }
+    const fetchProducts = () => {
+      setProducts(productsData);
     };
 
     fetchProducts();
@@ -40,7 +37,9 @@ export function ProductProvider({
   const value = { products };
 
   return (
-    <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
+    <ProductContext.Provider value={value}>
+      {children}
+    </ProductContext.Provider>
   );
 }
 
