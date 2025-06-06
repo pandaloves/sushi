@@ -3,7 +3,6 @@
 import { Box, Button, Typography, TextField, Paper } from "@mui/material";
 import { useState } from "react";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { baseUrl } from "@/utils/baseUrl";
 
 export function PaymentView() {
   const [formData, setFormData] = useState({
@@ -112,46 +111,15 @@ export function PaymentView() {
     return formIsValid;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit =  (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      try {
-        const orderId = localStorage.getItem("orderId");
-        if (!orderId || isNaN(parseInt(orderId, 10))) {
-          alert("Invalid order ID. Please try again.");
-          return;
-        }
-
-        const payload = {
-          paymentDto: {
-            ...formData,
-          },
-          orderId: parseInt(orderId, 10),
-        };
-
-        const response = await fetch(`${baseUrl}/Payments/create-payment`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
-
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error("Error response:", errorText);
-          throw new Error("Failed to submit payment");
-        }
-
-        await response.json();
+        const order = JSON.parse(localStorage.getItem("order") || "{}");
 
         localStorage.setItem("paymentDetails", JSON.stringify(formData));
 
         window.location.href = "/checkout/confirmation";
-      } catch (error) {
-        console.error("Error submitting payment:", error);
-        alert("Failed to submit payment. Please try again.");
-      }
+     return order;
     }
   };
 

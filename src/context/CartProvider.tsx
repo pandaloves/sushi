@@ -3,7 +3,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode, ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
-import { baseUrl } from "@/utils/baseUrl";
 import { useProduct } from "./ProductProvider";
 
 type Carts = Record<number, number>;
@@ -55,55 +54,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   const addProduct = async (productId: number, productQuantity: number) => {
-    try {
-      const response = await fetch(`${baseUrl}/Cart/add-to-cart`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cartItems: [{ productId, productQuantity }] }),
-      });
-
-      if (!response.ok) throw new Error("Failed to add product");
-
       setCurrentCart((prev) => ({
         ...prev,
         [productId]: (prev[productId] || 0) + productQuantity,
       }));
-    } catch (error) {
-      console.error("Error adding product:", error);
-    }
   };
 
   const deleteProduct = async (productId: number) => {
-    try {
-      const response = await fetch(
-        `${baseUrl}/Cart/delete-cart-item/${productId}`,
-        { method: "DELETE", headers: { "Content-Type": "application/json" } }
-      );
-
-      if (!response.ok) throw new Error("Failed to remove product");
-
       setCurrentCart((prev) => {
         const updatedCart = { ...prev };
         delete updatedCart[productId];
         return updatedCart;
       });
-    } catch (error) {
-      console.error("Error removing product:", error);
-    }
   };
 
   const clearCart = async () => {
-    try {
-      const response = await fetch(`${baseUrl}/Cart/delete-cart/`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) throw new Error("Failed to clear cart");
-
       setCurrentCart({});
-    } catch (error) {
-      console.error("Error clearing cart:", error);
-    }
   };
 
   const handleProductQuantity =
@@ -132,36 +98,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     router.push("/cart");
   };
 
-  const addOrder = async () => {
-    try {
-      const orderItems = Object.entries(currentCart).map(([id, qty]) => ({
-        productId: Number(id),
-        productQuantity: qty,
-      }));
+  const addOrder = () => {
+  const orderId = String(Math.floor(Math.random() * 1000000));
 
-      const totalAmount = getTotalCartAmount();
-
-      const response = await fetch(`${baseUrl}/Orders/create-order`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ orderItems, totalAmount }),
-      });
-
-      if (!response.ok) throw new Error("Failed to create order");
-
-      const data = await response.json();
-      const orderId = data.orderId;
-
-      localStorage.setItem("currentCart", JSON.stringify(currentCart));
-      localStorage.setItem("orderId", orderId);
-
-      router.push("/checkout/payment");
-
-      return orderId;
-    } catch (error) {
-      console.error("Error creating order:", error);
-    }
-  };
+  localStorage.setItem("orderId", orderId);
+  router.push("/checkout/payment");
+};
 
   const totalPrice = getTotalCartAmount();
   const cartProducts = getTotalCartProducts();

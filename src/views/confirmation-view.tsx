@@ -107,7 +107,7 @@ export function ConfirmationView() {
                   <Box display="flex" flexDirection="column" gap={1}>
                     <Typography variant="body1">{item.productName}</Typography>
                     <Typography variant="subtitle1">
-                      Pris: {item.productPrice}
+                      Pris: SEK {item.productPrice}
                     </Typography>
                     <Typography variant="body2">
                       Antal: {item.quantity}
