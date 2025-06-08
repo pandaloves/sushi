@@ -35,8 +35,8 @@ export function SearchInput({
         >
           <Icon
             icon="material-symbols:search"
-            width={35}
-            height={35}
+            width={28}
+            height={28}
             color="#fff"
           />
           <InputBase
@@ -49,7 +49,7 @@ export function SearchInput({
               flex: 1,
               width: "100%",
               color: "#fff",
-              fontSize: "1rem",
+              fontSize: "1.5rem",
               "&::placeholder": {
                 color: "rgba(252, 251, 251, 0.7)",
               },
