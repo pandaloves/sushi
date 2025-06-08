@@ -1,6 +1,13 @@
 "use client";
 
-import { Box, Button, Typography, TextField, IconButton } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  TextField,
+  IconButton,
+  InputLabel,
+} from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
 import { IProductProps } from "@/types/product";
 import { useCart } from "@/context/CartProvider";
@@ -124,41 +131,60 @@ export function ProductItem({
             >
               <Remove />
             </IconButton>
-            <TextField
-              type="number"
-              value={quantity}
-              label="Quantity"
-              onChange={(e) =>
-                handleQuantityChange(product.productId, Number(e.target.value))
-              }
+            <Box
               sx={{
-                width: 100,
-                borderRadius: 5,
-                backgroundColor: "common.white",
-                "& input": {
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <InputLabel
+                sx={{
+                  color: "#fa8203",
+                  fontSize: 16,
+                  fontWeight: 700,
                   textAlign: "center",
-                  width: "100%",
-                },
-                "& input[type=number]::-webkit-inner-spin-button": {
-                  WebkitAppearance: "none",
-                  margin: 0,
-                },
-                "& input[type=number]::-webkit-outer-spin-button": {
-                  WebkitAppearance: "none",
-                  margin: 0,
-                },
-                "& input[type=number]": {
-                  MozAppearance: "textfield",
-                },
-              }}
-              slotProps={{
-                input: { inputProps: { min: 0 } },
-                inputLabel: {
-                  sx: { color: "#fa8203", fontSize: 20, fontWeight: 700 },
-                },
-              }}
-            />
-
+                  mt: -2,
+                  mb: -0.5,
+                }}
+              >
+                Quantity
+              </InputLabel>
+              <TextField
+                type="number"
+                value={quantity}
+                onChange={(e) =>
+                  handleQuantityChange(
+                    product.productId,
+                    Number(e.target.value)
+                  )
+                }
+                sx={{
+                  width: 100,
+                  borderRadius: 5,
+                  backgroundColor: "common.white",
+                  "& input": {
+                    textAlign: "center",
+                    width: "100%",
+                  },
+                  "& input[type=number]::-webkit-inner-spin-button": {
+                    WebkitAppearance: "none",
+                    margin: 0,
+                  },
+                  "& input[type=number]::-webkit-outer-spin-button": {
+                    WebkitAppearance: "none",
+                    margin: 0,
+                  },
+                  "& input[type=number]": {
+                    MozAppearance: "textfield",
+                  },
+                }}
+                slotProps={{
+                  input: { inputProps: { min: 0 } },
+                }}
+                InputLabelProps={{ shrink: false }}
+              />
+            </Box>
             <IconButton
               onClick={() =>
                 handleQuantityChange(product.productId, quantity + 1)

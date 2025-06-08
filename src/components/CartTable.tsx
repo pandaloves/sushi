@@ -76,7 +76,7 @@ export function CartTable({
                       sx={{
                         width: 80,
                         height: 80,
-                        borderRadius: 2,
+                        borderRadius: 6,
                         objectFit: "contain",
                         cursor: "pointer",
                       }}
