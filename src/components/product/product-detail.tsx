@@ -29,12 +29,12 @@ export function ProductDetail({
       }}
     >
       <Box>
-        <Typography variant="h3" fontWeight={700}>
+        <Typography variant="h6" fontWeight={700}>
           {name}
         </Typography>
       </Box>
 
-      <Typography variant="h4" fontWeight={700} color="primary">
+      <Typography variant="h6" fontWeight={700} color="primary">
         {formatCurrency(price)}
       </Typography>
 
