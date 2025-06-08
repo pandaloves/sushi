@@ -141,7 +141,7 @@ export function ProductItem({
               <InputLabel
                 sx={{
                   color: "#fa8203",
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: 700,
                   textAlign: "center",
                   mt: -2,
