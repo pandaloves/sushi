@@ -111,15 +111,15 @@ export function PaymentView() {
     return formIsValid;
   };
 
-  const handleSubmit =  (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-        const order = JSON.parse(localStorage.getItem("order") || "{}");
+      const order = JSON.parse(localStorage.getItem("order") || "{}");
 
-        localStorage.setItem("paymentDetails", JSON.stringify(formData));
+      localStorage.setItem("paymentDetails", JSON.stringify(formData));
 
-        window.location.href = "/checkout/confirmation";
-     return order;
+      window.location.href = "/checkout/confirmation";
+      return order;
     }
   };
 
@@ -130,7 +130,7 @@ export function PaymentView() {
         sx={{ mt: 10, mb: 8, p: 4, maxWidth: 580, width: "100%" }}
       >
         <Typography
-          variant="h3"
+          variant="h5"
           gutterBottom
           sx={{ mb: 2, textAlign: "center" }}
         >
