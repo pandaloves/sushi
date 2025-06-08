@@ -27,7 +27,7 @@ export function ContactView() {
           color: "common.white",
         }}
       >
-        <Typography variant="h3" sx={{ my: 2 }}>
+        <Typography variant="h4" sx={{ my: 2 }}>
           Kontakta oss
         </Typography>
 
